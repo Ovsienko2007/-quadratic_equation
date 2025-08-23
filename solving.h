@@ -1,8 +1,8 @@
+#ifndef SOLVING_H_
+#define SOLVING_H_
+
 #include <assert.h>
 #include <math.h>
-
-#ifndef Death_Guardian
-#define Death_Guardian 0
 
 enum RootsCount
 {

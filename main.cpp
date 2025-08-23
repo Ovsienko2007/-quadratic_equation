@@ -2,6 +2,7 @@
 #include "solving.h"
 #include "output.h"
 #include "unitest.h"
+#include "work_with_colours.h"
 
 int main()
 {
@@ -13,7 +14,7 @@ int main()
     };
 
     if (uni_test()){
-        printf("Tests were complited\nresult: OK\n\n");
+        printf("Tests were complited\nResult: OK\n\n");
     }
     else{
         return 0;

@@ -14,7 +14,6 @@ int find_ans(Equation equat, AnsEquation *ans)
     return 0;
 }
 
-// TODO solve_linear_...
 int linear_equation(Equation equat, AnsEquation *ans)
 {
     assert(ans != NULL);

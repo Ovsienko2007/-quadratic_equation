@@ -2,10 +2,10 @@
 
 bool uni_test(){
     int num_of_tests = 8;
-    int i = 0;
-    int q = true;
+    int test_num = 0;
+    int unitest_res = true;
 
-    TestEquation tests[10] = {
+    TestEquation tests[] = {
         {{0, 0, 0},          {INFINITY_ROOTS, 0, 0}},
         {{1, 0, 0},          {ONE_ROOT, 0, 0}},
         {{0, 1, 0},          {ONE_ROOT, 0, 0}},
@@ -16,25 +16,26 @@ bool uni_test(){
         {{2, 2, 2},          {ZERO_ROOTS, 0, 0}}
     };
 
-    for (i = 0; i < num_of_tests; i++){
-
+    for (test_num = 0; test_num < num_of_tests; test_num++){
         AnsEquation ans_i = {ZERO_ROOTS, 0, 0};
-        find_ans(tests[i].equat, &ans_i);
+        find_ans(tests[test_num].equat, &ans_i);
 
-        if (!Check_ans(ans_i, tests[i].ans)){
-            printf("Test %d: %lf %lf %lf \n", i, tests[i].equat.a, tests[i].equat.b, tests[i].equat.c);
-            printf("\texpected ans: %s %lf %lf\n", 
-                   rootscount_to_string(tests[i].ans.num_valid_ans), tests[i].ans.ans1, tests[i].ans.ans2);
-            printf("\treceived ans: %s %lf %lf\n",\
-                 rootscount_to_string(ans_i.num_valid_ans), ans_i.ans1, ans_i.ans2);
-
-            q = false;
+        if (!Check_ans(ans_i, tests[test_num].ans)){
+            print_error(test_num, tests[test_num], ans_i);
+            unitest_res = false;
         }
-
     }
 
-    return q;
+    return unitest_res;
+}
 
+int print_error(int test_num, TestEquation test, AnsEquation ans){
+    printf("Test %d: %lf %lf %lf \n", test_num, test.equat.a, test.equat.b, test.equat.c);
+    printf("\texpected ans: %s %lf %lf\n", 
+            rootscount_to_string(test.ans.num_valid_ans), test.ans.ans1, test.ans.ans2);
+    printf("\treceived ans: %s %lf %lf\n",\
+            rootscount_to_string(ans.num_valid_ans), ans.ans1, ans.ans2);
+    return 0;
 }
 
 const char*  rootscount_to_string(RootsCount num) {

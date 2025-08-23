@@ -1,0 +1,45 @@
+#ifndef work_with_colours
+#define work_with_colours
+
+#include <stdarg.h>
+#include <stdio.h>
+
+#include "stdio.h"
+#include "solving.h"
+
+
+#define CONSOLE_BLACK      "\033[30m"
+#define CONSOLE_RED        "\033[31m"
+#define CONSOLE_GREEN      "\033[32m"
+#define CONSOLE_YELLOW     "\033[33m"
+#define CONSOLE_BLUE       "\033[34m"
+#define CONSOLE_PIRPLE     "\033[35m"
+#define CONSOLE_TURQUOISE  "\033[36m"
+#define CONSOLE_WHITE      "\033[37m"
+#define CONSOLE_RESET      "\033[39m"
+
+enum Colour{
+    BLACK     = 0,
+    RED       = 1,
+    GREEN     = 2,
+    YELLOW    = 3,
+    BLUE      = 4,
+    PIRPLE    = 5,
+    TURQUOISE = 6,
+    WHITE     = 7,
+    RESET     = 9,
+};
+
+enum TextEffects{
+    BOLD          = 1,
+    FADE          = 2,
+    ITALIC        = 3,
+    UNDERLINED    = 4,
+    BLINKING      = 5,
+    STRIKETHROUGH = 9
+};
+
+const char*  colour_to_str(Colour col);
+int  print_str(TextEffects format, Colour col, Colour back, const char str[], ...);
+
+#endif

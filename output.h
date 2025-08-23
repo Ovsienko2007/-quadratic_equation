@@ -1,13 +1,8 @@
+#ifndef OUTPUT_H_
+#define OUTPUT_H_
+
 #include <stdio.h>
-#include "solving.h"
+#include "work_with_colours.h"
 
-enum Colour{
-    GREEN,
-    RED,
-    RESET
-};
-
-
-const char*  colour_to_str(Colour col);
 int print_ans(struct AnsEquation ans);
- 
+#endif 
