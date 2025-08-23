@@ -4,42 +4,39 @@ int print_ans(AnsEquation ans)
 {
     switch (ans.num_valid_ans){
         case ZERO_ROOTS:
-            printf("The sequation has %sno roots%s\n", GREEN, RESET);
+            printf("The sequation has %sno roots%s\n", 
+                   colour_to_str(GREEN), colour_to_str(RESET));
             break;
 
         case ONE_ROOT:
-            printf("There is 1 root:\n  ans = %s %0.3lf %s\n", GREEN, ans.ans1, RESET);
+            printf("There is 1 root:\n  ans = %s %0.3lf %s\n", 
+                   colour_to_str(GREEN), ans.ans1, colour_to_str(RESET));
             break;
             
         case TWO_ROOTS:
-            // TODO split into 2 lines
-            printf("There are 2 roots:\n  ans1 = %s %0.4lf %s \n  ans1 = %s %0.4lf %s\n",
-                   GREEN, ans.ans1, RESET, GREEN, ans.ans2, RESET);
+            printf("There are 2 roots:\n  ans1 = %s %0.3lf %s \n  ans1 = %s %0.3lf %s\n",
+                   colour_to_str(GREEN), ans.ans1, colour_to_str(RESET),
+                   colour_to_str(GREEN), ans.ans2, colour_to_str(RESET));
             break;
 
         case INFINITY_ROOTS:
-            printf("%sInfinite%s number of roots\n", GREEN, RESET);
+            printf("%sInfinite%s number of roots\n",
+                   colour_to_str(GREEN), colour_to_str(RESET));
             break;
 
         default:
-            printf("%sError%s\n", RED, RESET);
+            printf("%sError%s\n", colour_to_str(RED), colour_to_str(RESET));
             break;
     }
     return 0;
 }
 
-/*
-int colour_to_str(Colour col){
-    int grn = 32;
-    int red = 31;
-    int res = 0;
+
+const char*  colour_to_str(Colour col) {
     switch (col){
-        case GREEN:
-            return 32;
-        case RED:
-            return 31;
-        case RESET:
-            return 0;
+        case RED:             return "\033[31m";
+        case GREEN:           return "\033[32m";
+        case RESET:           return "\033[0m";
+        default:              return "\033[0m";
     }
 }
-*/

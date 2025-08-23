@@ -1,8 +1,8 @@
 #include <assert.h>
 #include <math.h>
 
-#ifndef guard
-#define guard 0
+#ifndef Death_Guardian
+#define Death_Guardian 0
 
 enum RootsCount
 {

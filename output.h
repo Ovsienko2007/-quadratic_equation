@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include "solving.h"
 
-// TODO color_printf(COLOR, "...", ...) (read about variadic args
- 
-#define GREEN   "\033[32m"
-#define RED     "\033[31m"
-#define RESET   "\033[0m"
+enum Colour{
+    GREEN,
+    RED,
+    RESET
+};
 
-//int colour_to_str(Colour);
+
+const char*  colour_to_str(Colour col);
 int print_ans(struct AnsEquation ans);
  
