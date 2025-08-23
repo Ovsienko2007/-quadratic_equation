@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <ctype.h>
+
 #include "solving.h"
  
 int buffer_cleaning();

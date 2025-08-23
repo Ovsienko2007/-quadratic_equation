@@ -20,7 +20,9 @@ int main()
         return 0;
     }
 
-    input_equation(&equat);
+    if (input_equation(&equat)){
+        return 0;
+    }
 
     find_ans(equat, &ans);
 

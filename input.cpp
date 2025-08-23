@@ -17,6 +17,10 @@ int input_equation(Equation *equation)
     } while (scanf("%lf %lf %lf", &(equation->a), &(equation->b), &(equation->c)) != 3 || 
              check_not_inf_non(equation->a) || check_not_inf_non(equation->b) || check_not_inf_non(equation->c));
 
+    if (isalpha(getchar())){
+        buffer_cleaning();
+        return input_equation(equation);
+    }
     return 0;
 }
 
