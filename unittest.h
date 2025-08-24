@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "solving.h"
+#include "work_with_colours.h"
 
 
 /**
@@ -48,6 +49,6 @@ int print_error(int test_num, TestEquation test, AnsEquation ans);
  * 
  * @return have all tests been passed
  */
-bool uni_test();
+bool run_unit_tests();
 
 #endif

@@ -1,24 +1,27 @@
 #include "input.h"
 #include "solving.h"
 #include "output.h"
-#include "unitest.h"
+#include "unittest.h"
 #include "work_with_colours.h"
+#include "flags.h"
 
-int main()
+
+
+int main(int argc, char *argv[])
 {
+    if (check_flag(argc, argv, "--test")){
+        if (run_unit_tests()){
+            printf("Tests were complited\nResult: OK\n\n");
+        }
+        return 0;
+    }
+
     struct Equation equat = {};
     struct AnsEquation ans = {
         .num_valid_ans = ZERO_ROOTS,
         .ans1 = 0,
         .ans2 = 0
     };
-
-    if (uni_test()){
-        printf("Tests were complited\nResult: OK\n\n");
-    }
-    else{
-        return 0;
-    }
 
     if (input_equation(&equat)){
         return 0;

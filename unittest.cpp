@@ -1,6 +1,6 @@
-#include "unitest.h"
+#include "unittest.h"
 
-bool uni_test(){
+bool run_unit_tests(){
     int test_num = 0;
     int unitest_res = true;
 
@@ -32,11 +32,13 @@ bool uni_test(){
 }
 
 int print_error(int test_num, TestEquation test, AnsEquation ans){
-    printf("Test %d was failed: %lf %lf %lf \n", test_num, test.equat.a, test.equat.b, test.equat.c);
-    printf("\texpected ans: %s %lf %lf\n", 
+    printf(CONSOLE_RED " Test %d was failed:" CONSOLE_RESET " %.4lf %.4lf %.4lf \n",
+           test_num, test.equat.a, test.equat.b, test.equat.c);
+    printf("\t" CONSOLE_GREEN "expected ans: %14s %.4lf %.4lf\n" CONSOLE_RESET, 
             rootscount_to_string(test.ans.num_valid_ans), test.ans.ans1, test.ans.ans2);
-    printf("\treceived ans: %s %lf %lf\n",\
+    printf("\t" CONSOLE_YELLOW "received ans: %14s %.4lf %.4lf\n" CONSOLE_RESET,\
             rootscount_to_string(ans.num_valid_ans), ans.ans1, ans.ans2);
+    printf("______________________________________________________________\n");
     return 0;
 }
 

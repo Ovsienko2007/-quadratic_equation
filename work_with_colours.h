@@ -7,6 +7,9 @@
 #include "stdio.h"
 #include "solving.h"
 
+/**
+ * @brief macro to change the color of further text
+ */
 #define CONSOLE_BLACK      "\033[30m"
 #define CONSOLE_RED        "\033[31m"
 #define CONSOLE_GREEN      "\033[32m"
