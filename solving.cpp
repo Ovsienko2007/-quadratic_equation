@@ -1,26 +1,26 @@
 #include "solving.h"
 
-int find_ans(Equation equat, AnsEquation *ans)
+int find_ans(Equation equation, AnsEquation *ans)
 {
     assert(ans != NULL);
 
-    if (is_equal(equat.a, 0)){
-        linear_equation(equat, ans);
+    if (is_equal(equation.a, 0)){
+        linear_equation(equation, ans);
     }
     else{
-        quadratic_equation(equat, ans);
+        quadratic_equation(equation, ans);
     }
 
     return 0;
 }
 
-int linear_equation(Equation equat, AnsEquation *ans)
+int linear_equation(Equation equation, AnsEquation *ans)
 {
     assert(ans != NULL);
 
-    if (is_equal(equat.b, 0))    
+    if (is_equal(equation.b, 0))    
     {
-        if (is_equal(equat.c, 0))
+        if (is_equal(equation.c, 0))
         {
             ans->num_valid_ans = INFINITY_ROOTS;
         }
@@ -31,7 +31,7 @@ int linear_equation(Equation equat, AnsEquation *ans)
     }
     else
     {
-        ans->ans2 = ans->ans1 = -equat.c / equat.b;
+        ans->ans2 = ans->ans1 = -equation.c / equation.b;
         ans->num_valid_ans = ONE_ROOT;
         
     }
@@ -39,14 +39,14 @@ int linear_equation(Equation equat, AnsEquation *ans)
     return 0;
 }
 
-int quadratic_equation(Equation equat, AnsEquation *ans)
+int quadratic_equation(Equation equation, AnsEquation *ans)
 {
     
-    double dis = equat.b * equat.b - 4 * equat.a * equat.c;
+    double dis = equation.b * equation.b - 4 * equation.a * equation.c;
 
     if (is_equal(dis, 0))
     {
-        ans->ans1 = ans->ans2 = (-equat.b) / 2 / equat.a; 
+        ans->ans1 = ans->ans2 = (-equation.b) / 2 / equation.a; 
         ans->num_valid_ans = ONE_ROOT;
     }
     
@@ -57,8 +57,8 @@ int quadratic_equation(Equation equat, AnsEquation *ans)
 
     else
     {
-        ans->ans1 = (-equat.b - sqrt(dis)) / 2 / equat.a;
-        ans->ans2 = (-equat.b + sqrt(dis)) / 2 / equat.a;
+        ans->ans1 = (-equation.b - sqrt(dis)) / 2 / equation.a;
+        ans->ans2 = (-equation.b + sqrt(dis)) / 2 / equation.a;
         ans->num_valid_ans = TWO_ROOTS;
     }
     return 0;

@@ -10,7 +10,7 @@ int input_equation(Equation *equation)
             if (buffer_cleaning())
             {
                 printf("End of file");
-                return 0;
+                return 1;
             }
         }
         flag = true;
@@ -36,7 +36,7 @@ int buffer_cleaning(){
     int c;
     do{
         c = getchar();
-        if (c ==  EOF){
+        if (c ==  EOF){   
             return 1;
         }
     } while (c != '\n');

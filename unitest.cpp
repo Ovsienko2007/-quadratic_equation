@@ -1,9 +1,9 @@
 #include "unitest.h"
 
 bool uni_test(){
-    int num_of_tests = 8;
     int test_num = 0;
     int unitest_res = true;
+
 
     TestEquation tests[] = {
         {{0, 0, 0},          {INFINITY_ROOTS, 0, 0}},
@@ -15,6 +15,8 @@ bool uni_test(){
         {{0, 0, 1},          {ZERO_ROOTS, 0, 0}},
         {{2, 2, 2},          {ZERO_ROOTS, 0, 0}}
     };
+
+    int num_of_tests = sizeof(tests) / sizeof (tests[0]);
 
     for (test_num = 0; test_num < num_of_tests; test_num++){
         AnsEquation ans_i = {ZERO_ROOTS, 0, 0};
@@ -30,7 +32,7 @@ bool uni_test(){
 }
 
 int print_error(int test_num, TestEquation test, AnsEquation ans){
-    printf("Test %d: %lf %lf %lf \n", test_num, test.equat.a, test.equat.b, test.equat.c);
+    printf("Test %d was failed: %lf %lf %lf \n", test_num, test.equat.a, test.equat.b, test.equat.c);
     printf("\texpected ans: %s %lf %lf\n", 
             rootscount_to_string(test.ans.num_valid_ans), test.ans.ans1, test.ans.ans2);
     printf("\treceived ans: %s %lf %lf\n",\
