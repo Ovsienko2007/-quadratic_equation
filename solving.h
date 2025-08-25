@@ -4,39 +4,7 @@
 #include <assert.h>
 #include <math.h>
 
-/**
- * @brief reate names for number of answers
- */
-enum RootsCount
-{
-    ONE_ROOT,
-    TWO_ROOTS,
-    INFINITY_ROOTS,
-    ZERO_ROOTS
-};
-
-/**
- * @brief contain coefficents of quadratic equation
- */
-struct Equation{
-    double a;
-    double b;
-    double c;
-};  
-
-/**
- * @brief contain answer
- */
-struct AnsEquation{
-    RootsCount num_valid_ans;
-    double ans1;
-    double ans2;
-};
-
-/**
- * @brief permissible error in comparing double numbers
- */
-const double EPS = 1e-6; 
+#include "structures.h"
 
 /**
  * @brief determines if two double numbers are equal
@@ -61,7 +29,7 @@ int minus_zero_to_zero(double *ans1);
  * @brief permissible error in comparing double numbers
  * 
  * @param [in] equation coefficents of quadratic equation
- * @param [out] ans answe of quadratic equation
+ * @param [out] ans     answer of quadratic equation
  * 
  * @return 0
  */
@@ -71,7 +39,7 @@ int find_ans(struct Equation equation, struct AnsEquation *ans);
  * @brief solves a linear equation
  * 
  * @param [in] equation coefficents of quadratic equation
- * @param [out] ans answe of quadratic equation
+ * @param [out] ans     answer of quadratic equation
  * 
  * @return 0
  */
@@ -81,7 +49,7 @@ int linear_equation(struct Equation equation, struct AnsEquation *ans);
  * @brief solves a quadratic equation
  * 
  * @param [in] equation coefficents of quadratic equation
- * @param [out] ans answe of quadratic equation
+ * @param [out] ans     answer of quadratic equation
  * 
  * @return 0
  */

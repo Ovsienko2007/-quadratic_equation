@@ -1,7 +1,6 @@
 #include "output.h"
 
-int print_ans(AnsEquation ans)
-{
+error print_ans(AnsEquation ans){
     switch (ans.num_valid_ans){
         case ZERO_ROOTS:
             printf("The sequation has " CONSOLE_RED "no roots" CONSOLE_RESET "\n");
@@ -28,5 +27,16 @@ int print_ans(AnsEquation ans)
             break;
     }
     
+    return 0;
+}
+
+error print_test_res(tests_res result){
+    printf("Tests were complited\n Result: ");
+    if (result.test_status){
+        printf(CONSOLE_GREEN "\tTESTS PASSED: %d/%d\n" CONSOLE_RESET, result.test_correct, result.num_of_tests);
+    }
+    else{
+        printf(CONSOLE_RED "\tTESTS PASSED: %d/%d\n" CONSOLE_RESET, result.test_correct, result.num_of_tests);
+    }
     return 0;
 }

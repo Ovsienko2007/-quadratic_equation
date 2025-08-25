@@ -2,7 +2,9 @@
 #define OUTPUT_H_
 
 #include <stdio.h>
-#include "work_with_colours.h"
+
+#include "structures.h"
+#include "work_with_colors.h"
 
 /**
  * @brief print answer of quadratic equation
@@ -13,5 +15,15 @@
  * 
  * The answer is highlighted in color
  */
-int print_ans(struct AnsEquation ans);
+error print_ans(struct AnsEquation ans);
+
+/**
+ * @brief print res of unittest
+ * 
+ * @param [in] result result of test
+ * 
+ * @return 0 when output will be completed
+ */
+error print_test_res(tests_res result);
+
 #endif 

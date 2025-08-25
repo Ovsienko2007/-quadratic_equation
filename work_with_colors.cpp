@@ -1,6 +1,6 @@
-#include "work_with_colours.h"
+#include "work_with_colors.h"
 
-const char* colour_to_str(Colour col)
+const char* color_to_str(Color col)
 {
     switch (col){
         case BLACK:     return CONSOLE_BLACK;
@@ -16,7 +16,7 @@ const char* colour_to_str(Colour col)
     }
 }
 
-int  print_str(TextEffects format, Colour col, Colour back, const char str[], ...) {
+int  print_str(TextEffects format, Color col, Color back, const char str[], ...) {
     va_list param;
     va_start(param, str);
 

@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 #include "stdio.h"
-#include "solving.h"
+#include "structures.h"
 
 /**
  * @brief macro to change the color of further text
@@ -22,9 +22,9 @@
 
 
 /**
- * @brief reate colours to numbers
+ * @brief reate colors to numbers
  */
-enum Colour{
+enum Color{
     BLACK     = 0,
     RED       = 1,
     GREEN     = 2,
@@ -49,21 +49,25 @@ enum TextEffects{
 };
 
 /**
- * @brief converts the number of answers to string
+ * @brief converts color to string
+ * 
+ * @param [in] col color
+ * 
+ * @return result of transformation
  */
-const char*  colour_to_str(Colour col);
+const char*  color_to_str(Color col);
 
 /**
  * @brief outputs the answer with the specified effect, color, background
  * 
- * @param [in] format text efect
- * @param [in] col text colour
- * @param [in] back background colour
- * @param [in] str text
- * @param [in] param contains numbers which will be printed
+ * @param [in] format  text efect
+ * @param [in] col     text colour
+ * @param [in] back    background colour
+ * @param [in] str     text
+ * @param [in] param   contains numbers which will be printed
  * 
  * @return 0
  */
-int  print_str(TextEffects format, Colour col, Colour back, const char str[], ...);
+int  print_str(TextEffects format, Color col, Color back, const char str[], ...);
 
 #endif

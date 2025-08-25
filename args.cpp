@@ -1,0 +1,21 @@
+#include "args.h"
+
+char** check_argument(int argc, char **argv, const char *arg){
+    for (int arg_num = 0; arg_num < argc; arg_num++){
+        if (strcmp(argv[arg_num], arg) == 0){
+            return argv + arg_num;
+        }
+    }
+
+    return 0;    
+}
+
+const char* get_option_argument(int argc, char **argv, char **option_ptr, bool *get_option){
+    if (option_ptr - argv >= argc) {
+        return "";
+    }
+
+    *get_option = true;
+
+    return *(option_ptr + 1);
+}
