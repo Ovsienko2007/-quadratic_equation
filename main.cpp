@@ -13,15 +13,11 @@ int main(int argc, char *argv[]){
         
     }
 
-    // TODO put const where possible
     if (char **option_ptr = check_argument(argc, argv, "--file-test")){
-        bool is_file_present = false;
+        const char *file_name = NULL;
 
-        // TODO return NULL instead of is_file_present
-        const char *file_name = get_option_argument(argc, argv, option_ptr, &is_file_present);
-
-        if (!is_file_present){
-            printf(CONSOLE_RED "EROOR" CONSOLE_RESET); // TODO More detailed message
+        if (get_option_argument(argc, argv, option_ptr)){
+            printf(CONSOLE_RED "ERROR: WERE IS NO NAME OF FILE AFTER ARGUMENT!" CONSOLE_RESET);
             return 0;
         }
 

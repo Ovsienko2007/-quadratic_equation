@@ -21,10 +21,9 @@ char** check_argument(int argc, char **argv, const char *arg);
  * @param [in]  argc       number of arguments
  * @param [in]  argv       list of arguments
  * @param [in]  option_ptr adress of argument
- * @param [out] get_option shows if there is an argument option
  * 
  * @return option of argument
  */
-const char* get_option_argument(int argc, char **argv, char **option_ptr, bool *get_option);
+const char* get_option_argument(int argc, char **argv, char **option_ptr);
 
 #endif

@@ -10,12 +10,10 @@ char** check_argument(int argc, char **argv, const char *arg){
     return 0;    
 }
 
-const char* get_option_argument(int argc, char **argv, char **option_ptr, bool *get_option){
+const char* get_option_argument(int argc, char **argv, char **option_ptr){
     if (option_ptr - argv >= argc) {
-        return "";
+        return NULL;
     }
-
-    *get_option = true;
 
     return *(option_ptr + 1);
 }
