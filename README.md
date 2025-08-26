@@ -27,7 +27,8 @@
 <a name="Solving"><h2>Как решать квадратное уравнение</h2></a>
 Решение использованное в программе представлено на фото ниже
 
-![alt-текст](./Photo/img1.png "Текст заголовка логотипа 1")
+![alt-текст](https://github.com/Ovsienko2007/-quadratic_equation/blob/main/Photo/img3.png
+ "Текст заголовка логотипа 1")
 
 
 
