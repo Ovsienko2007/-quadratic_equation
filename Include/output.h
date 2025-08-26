@@ -1,3 +1,8 @@
+/**
+ * @file output.h
+ * @brief outputs the answer to the equation and the test results to the console
+ */
+
 #ifndef OUTPUT_H_
 #define OUTPUT_H_
 

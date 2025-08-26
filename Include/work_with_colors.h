@@ -1,3 +1,8 @@
+/**
+ * @file work_with_colors.h
+ * @brief gives color output
+ */
+
 #ifndef work_with_colours
 #define work_with_colours
 

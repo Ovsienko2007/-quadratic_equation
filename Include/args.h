@@ -1,10 +1,10 @@
-#ifndef ARGS_H_
-#define ARGS_H_
-
 /**
  * @file args.h
- * @brief read arguments
+ * @brief read flag and option
  */
+
+#ifndef ARGS_H_
+#define ARGS_H_
 
 #include <string.h>
 #include <stdio.h>

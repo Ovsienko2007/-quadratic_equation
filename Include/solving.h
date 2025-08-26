@@ -1,3 +1,8 @@
+/**
+ * @file solving.h
+ * @brief solves a quadratic equation
+ */
+
 #ifndef SOLVING_H_
 #define SOLVING_H_
 

@@ -71,10 +71,10 @@ bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
 }
 
 RootsCount string_to_rootscount(const char *num, bool *not_count){
-    if (NULL != strstr("ONE_ROOT", num))        return ONE_ROOT;
-    if (NULL != strstr("TWO_ROOTS", num))       return TWO_ROOTS;
-    if (NULL != strstr("INFINITY_ROOTS", num))  return INFINITY_ROOTS;
-    if (NULL != strstr("ZERO_ROOTS", num))      return ZERO_ROOTS;
+    if (strcmp("ONE_ROOT", num) == 0)        return ONE_ROOT;
+    if (strcmp("TWO_ROOTS", num) == 0)       return TWO_ROOTS;
+    if (strcmp("INFINITY_ROOTS", num) == 0)  return INFINITY_ROOTS;
+    if (strcmp("ZERO_ROOTS", num) == 0)      return ZERO_ROOTS;
 
     *not_count  = true;
     return ZERO_ROOTS;

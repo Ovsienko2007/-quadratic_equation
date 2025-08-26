@@ -1,3 +1,8 @@
+/**
+ * @file structures.h
+ * @brief solves a quadratic equation
+ */
+
 #ifndef STRUCTURES_H_
 #define STRUCTURES_H_
 

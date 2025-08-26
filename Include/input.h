@@ -1,3 +1,8 @@
+/**
+ * @file input.h
+ * @brief receives input from the console or from a file
+ */
+
 #ifndef INPUT_H_
 #define INPUT_H_
 
