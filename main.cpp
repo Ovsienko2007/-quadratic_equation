@@ -6,6 +6,9 @@
 #include "args.h"
 #include "structures.h"
 
+// TODO: разбить на папки: source, include, build и сразу тогда сделать так, чтобы не прописывать #include include/input.h. Использовать флаг -I при сборке 
+// написать README
+
 int main(int argc, char *argv[]){
     if (check_argument(argc, argv, "--embedded-test")){
         print_test_res(run_unit_tests_from_code());
@@ -14,12 +17,13 @@ int main(int argc, char *argv[]){
     }
 
     if (char **option_ptr = check_argument(argc, argv, "--file-test")){
-        const char *file_name = NULL;
+        const char *file_name = get_option_argument(argc, argv, option_ptr);
 
-        if (get_option_argument(argc, argv, option_ptr)){
+        if (!file_name){
             printf(CONSOLE_RED "ERROR: WERE IS NO NAME OF FILE AFTER ARGUMENT!" CONSOLE_RESET);
             return 0;
         }
+    
 
         print_test_res(run_unit_tests_from_txt(file_name));
 
