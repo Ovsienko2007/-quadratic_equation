@@ -1,6 +1,11 @@
 #ifndef ARGS_H_
 #define ARGS_H_
 
+/**
+ * @file args.h
+ * @brief read arguments
+ */
+
 #include <string.h>
 #include <stdio.h>
 

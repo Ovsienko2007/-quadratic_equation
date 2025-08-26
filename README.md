@@ -3,9 +3,9 @@
 Программа которая решает квадратное уравнение
 
 ## Содержание
-[Что такое квадратное уравнение](What_is_it)
+[Что такое квадратное уравнение](#What_is_it)
 
-[Как решать квадратное уравнение](Solving)
+[Как решать квадратное уравнение](#Solving)
 
 [Установка программы](#Installation)
 
@@ -77,11 +77,11 @@ make
 
 Включая некоторые выаоды ошибок (последние были сгенерированны специально для демонстрации)
 
-![Иллюстрация к проекту](./Photo/img2.png)
+![Иллюстрация к проекту](https://github.com/Ovsienko2007/-quadratic_equation/blob/main/Photo/img2.png)
 
-![Иллюстрация к проекту](./Photo/img3.png)
+![Иллюстрация к проекту](https://github.com/Ovsienko2007/-quadratic_equation/blob/main/Photo/img3.png)
 
-![Иллюстрация к проекту](./Photo/img4.png)
+![Иллюстрация к проекту](https://github.com/Ovsienko2007/-quadratic_equation/blob/main/Photo/img4.png)
 
 <a name="avt"><h2>Автор</h2></a>
 Овсиекно Глеб
