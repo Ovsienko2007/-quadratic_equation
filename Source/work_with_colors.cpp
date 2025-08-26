@@ -1,8 +1,8 @@
 #include "work_with_colors.h"
 
-const char* color_to_str(Color col)
+const char* color_to_sescape_sequence(Color cl)
 {
-    switch (col){
+    switch (cl){
         case BLACK:     return CONSOLE_BLACK;
         case RED:       return CONSOLE_RED;
         case GREEN:     return CONSOLE_GREEN;
@@ -16,11 +16,11 @@ const char* color_to_str(Color col)
     }
 }
 
-int  print_str(TextEffects format, Color col, Color back, const char str[], ...) {
+int  print_str(TextFormat format, Color cl, Color bg, const char str[], ...) {
     va_list param;
     va_start(param, str);
 
-    printf("\033[%d;3%d;4%dm", format, col, back);
+    printf("\033[%d;3%d;4%dm", format, cl, bg);
     vprintf(str, param);
     printf("\033[0;39m");
 

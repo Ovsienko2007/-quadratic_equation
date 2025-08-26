@@ -7,7 +7,7 @@ char** check_argument(int argc, char **argv, const char *arg){
         }
     }
 
-    return 0;    
+    return 0;
 }
 
 const char* get_option_argument(int argc, char **argv, char **option_ptr){

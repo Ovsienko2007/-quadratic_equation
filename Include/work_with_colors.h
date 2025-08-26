@@ -39,7 +39,7 @@ enum Color{
 /**
  * @brief reate texts effects to numbers
  */
-enum TextEffects{
+enum TextFormat{
     BOLD          = 1,
     FADE          = 2,
     ITALIC        = 3,
@@ -55,7 +55,7 @@ enum TextEffects{
  * 
  * @return result of transformation
  */
-const char*  color_to_str(Color col);
+const char*  color_to_sescape_sequence(Color col);
 
 /**
  * @brief outputs the answer with the specified effect, color, background
@@ -68,6 +68,6 @@ const char*  color_to_str(Color col);
  * 
  * @return 0
  */
-int  print_str(TextEffects format, Color col, Color back, const char str[], ...);
+int  print_str(TextFormat format, Color col, Color back, const char str[], ...);
 
 #endif

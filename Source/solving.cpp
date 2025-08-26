@@ -27,20 +27,19 @@ int linear_equation(Equation equation, AnsEquation *ans){
     else{
         ans->ans2 = ans->ans1 = -equation.c / equation.b;
         ans->num_valid_ans = ONE_ROOT;
-        
     }
 
     return 0;
 }
 
-int quadratic_equation(Equation equation, AnsEquation *ans){    
+int quadratic_equation(Equation equation, AnsEquation *ans){
     double dis = equation.b * equation.b - 4 * equation.a * equation.c;
 
     if (is_equal(dis, 0)){
-        ans->ans1 = ans->ans2 = (-equation.b) / 2 / equation.a; 
+        ans->ans1 = ans->ans2 = (-equation.b) / 2 / equation.a;
         ans->num_valid_ans = ONE_ROOT;
     }
-    
+
     else if (dis < -EPS){
         ans->num_valid_ans = ZERO_ROOTS;
     }
@@ -50,16 +49,12 @@ int quadratic_equation(Equation equation, AnsEquation *ans){
         ans->ans2 = (-equation.b + sqrt(dis)) / 2 / equation.a;
         ans->num_valid_ans = TWO_ROOTS;
     }
-    
+
     return 0;
 }
 
 bool is_equal(double x1, double x2){
-    if (fabs(x1 - x2) < EPS){
-        return true;
-    } else{
-        return false;
-    }
+    return fabs(x1 - x2) < EPS;
 }
 
 int minus_zero_to_zero(double *ans){

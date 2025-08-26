@@ -1,4 +1,4 @@
-#include "unittest.h"
+#include "unit_test.h"
 
 tests_res run_unit_tests_from_txt(const char *file_name){
     FILE * test_file  = fopen(file_name, "r");
@@ -6,13 +6,13 @@ tests_res run_unit_tests_from_txt(const char *file_name){
     assert(test_file);
 
     tests_res unittest_res = {true, 0, 0};
-    
+
     int test_num = 1;
     bool test_status = true;
 
     TestEquation test;
 
-    while (!read_test_from_file(test_file, &test, test_num)){    
+    while (!read_test_from_file(test_file, &test, test_num)){
         test_status = check_test(test_num, test);
 
         if (unittest_res.test_status){
@@ -24,7 +24,7 @@ tests_res run_unit_tests_from_txt(const char *file_name){
         test_num++;
     }
 
-    fclose(test_file); 
+    fclose(test_file);
 
     unittest_res.num_of_tests = test_num - 1;
 
@@ -78,7 +78,7 @@ bool check_test(int test_num, TestEquation test){
 int print_error(int test_num, TestEquation test, AnsEquation ans){
     printf(CONSOLE_RED " Test %d was failed:" CONSOLE_RESET " %.4lf %.4lf %.4lf \n",
            test_num, test.equat.a, test.equat.b, test.equat.c);
-    printf("\t" CONSOLE_GREEN "expected ans: %14s %.4lf %.4lf\n" CONSOLE_RESET, 
+    printf("\t" CONSOLE_GREEN "expected ans: %14s %.4lf %.4lf\n" CONSOLE_RESET,
             rootscount_to_string(test.ans.num_valid_ans), test.ans.ans1, test.ans.ans2);
     printf("\t" CONSOLE_YELLOW "received ans: %14s %.4lf %.4lf\n" CONSOLE_RESET,\
             rootscount_to_string(ans.num_valid_ans), ans.ans1, ans.ans2);

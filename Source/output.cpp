@@ -10,10 +10,10 @@ error print_ans(AnsEquation ans){
             printf("There is 1 root:\n"
                    "   ans = " CONSOLE_GREEN "%0.3lf" CONSOLE_RESET "\n", ans.ans1);
             break;
-            
+
         case TWO_ROOTS:
-            printf("There are 2 roots:\n"  
-                  "   ans1 = " CONSOLE_GREEN "%0.3lf" CONSOLE_RESET "\n"  
+            printf("There are 2 roots:\n"
+                  "   ans1 = " CONSOLE_GREEN "%0.3lf" CONSOLE_RESET "\n"
                   "   ans1 = " CONSOLE_GREEN "%0.3lf" CONSOLE_RESET "\n",
                   ans.ans1, ans.ans2);
             break;
@@ -26,7 +26,7 @@ error print_ans(AnsEquation ans){
             print_str(BOLD, RED,  YELLOW, "ERROR");
             break;
     }
-    
+
     return 0;
 }
 
