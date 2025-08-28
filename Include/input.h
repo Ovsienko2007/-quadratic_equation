@@ -12,26 +12,16 @@
 #include <string.h>
 #include <assert.h>
 
-#include "structures.h"
+#include "solving.h"
 #include "work_with_colors.h"
 
 /**
- * @brief clean buffer of stream
- * 
- * @param [in] stream stream
- * 
- * @return has the input in the stream ended
-*/
-int clean_buffer(FILE *stream);
-
-/**
- * @brief check is number not inf or NaN
- * 
- * @param [in] x number
- * 
- * @return is double not inf or NaN
-*/
-bool check_not_inf_nan(double x);
+ * @brief combines the structure of the equation coefficients and the structure of the answers
+ */
+struct TestEquation{
+    Equation equat; 
+    AnsEquation ans;
+};
 
 /**
  * @brief Gets coefficents for quadratic equation
@@ -52,15 +42,4 @@ bool input_equation(Equation *equation);
  * @return 0 if input is completed without obtaining the required values, 1 otherwise
 */
 bool read_test_from_file(FILE *fin, TestEquation *test, int line);
-
-/**
- * @brief Transform str to RootsCount
- * 
- * @param [in]  num        str
- * @param [out] not_count  became true if num is not RootsCount
- * 
- * @return result of Transformation
-*/
-RootsCount string_to_rootscount(const char *num, bool *not_count);
-
 #endif

@@ -4,11 +4,10 @@
 #include "unit_test.h"
 #include "work_with_colors.h"
 #include "args.h"
-#include "structures.h"
-
-// TODO: разбить на папки: source, include, build и сразу тогда сделать так, чтобы не прописывать #include include/input.h. Использовать флаг -I при сборке
+#include "my_assert.h"
 
 int main(int argc, char *argv[]){
+    MY_ASSERT(2 < 1, 0);
     if (check_argument(argc, argv, "--embedded-test")){
         print_test_res(run_unit_tests_from_code());
         return 0;
@@ -22,7 +21,6 @@ int main(int argc, char *argv[]){
             printf(CONSOLE_RED "ERROR: WERE IS NO NAME OF FILE AFTER ARGUMENT!\n" CONSOLE_RESET);
             return 0;
         }
-
 
         print_test_res(run_unit_tests_from_txt(file_name));
 

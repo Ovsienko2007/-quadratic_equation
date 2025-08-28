@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-#include "structures.h"
+#include "solving.h"
 #include "work_with_colors.h"
 
 /**
@@ -20,15 +20,6 @@
  * 
  * The answer is highlighted in color
  */
-error print_ans(struct AnsEquation ans);
-
-/**
- * @brief print res of unittest
- * 
- * @param [in] result result of test
- * 
- * @return 0 when output will be completed
- */
-error print_test_res(tests_res result);
+bool print_ans(struct AnsEquation ans);
 
 #endif 

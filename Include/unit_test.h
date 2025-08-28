@@ -12,62 +12,39 @@
 
 #include "solving.h"
 #include "work_with_colors.h"
-#include "structures.h"
+#include "solving.h"
 #include "input.h"
 
 /**
- * @brief determines whether the answer matches the correct one
- * 
- * @param [in] x answer of programm
- * @param [in] y correct answer
- * 
- * @return are the answers equal
+ * @brief contains the test result, the number of correct tests and the total number of tests
  */
-bool check_ans(AnsEquation x, AnsEquation y);
-
-/**
- * @brief converts the number of answers into a string
- * 
- * @param [in] num number of answers
- * 
- * @return string number of answers 
- */
-const char* rootscount_to_string(RootsCount num);
-
-/**
- * @brief it shows that the answers are not equal
- * 
- * @param [in] test_num test number
- * @param [in] test     test data
- * @param [in] ans      program answer
- * 
- * @return string number of answers 
- */
-int print_error(int test_num, TestEquation test, AnsEquation ans);
-
-/**
- * @brief checks the work of solving the equation
- * 
- * @param [in] test_num test number
- * @param [in] test     test data
- * 
- * @return have test been passed
- */
-bool check_test(int test_num, TestEquation test);
+struct TestsRes{
+    bool test_status;
+    int num_of_tests;
+    int test_correct;
+};
 
 /**
  * @brief checks the work of solving the equation by tests from code
  * 
  * @return have all tests been passed
  */
-tests_res run_unit_tests_from_code();
-
+TestsRes run_unit_tests_from_code();
 
 /**
  * @brief checks the work of solving the equation by tests from file
  * 
  * @return have all tests been passed
  */
-tests_res run_unit_tests_from_txt(const char *name);
+TestsRes run_unit_tests_from_txt(const char *name);
+
+/**
+ * @brief print res of unittest
+ * 
+ * @param [in] result result of test
+ * 
+ * @return 0 when output will be completed
+ */
+bool print_test_res(TestsRes result);
 
 #endif

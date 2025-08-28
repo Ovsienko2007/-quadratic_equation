@@ -1,19 +1,63 @@
 #include "unit_test.h"
 
-tests_res run_unit_tests_from_txt(const char *file_name){
+/**
+ * @brief checks the work of solving the equation
+ * 
+ * @param [in] test_num test number
+ * @param [in] test     test data
+ * 
+ * @return have test been passed
+ */
+static bool check_test(int test_num, TestEquation test);
+
+/**
+ * @brief it shows that the answers are not equal
+ * 
+ * @param [in] test_num test number
+ * @param [in] test     test data
+ * @param [in] ans      program answer
+ * 
+ * @return string number of answers 
+ */
+static int print_error(int test_num, TestEquation test, AnsEquation ans);
+
+/**
+ * @brief determines whether the answer matches the correct one
+ * 
+ * @param [in] x answer of programm
+ * @param [in] y correct answer
+ * 
+ * @return are the answers equal
+ */
+static bool check_ans(AnsEquation x, AnsEquation y);
+
+/**
+ * @brief converts the number of answers into a string
+ * 
+ * @param [in] num number of answers
+ * 
+ * @return string number of answers 
+ */
+static const char* rootscount_to_string(RootsCount num);
+
+TestsRes run_unit_tests_from_txt(const char *file_name){
     FILE * test_file  = fopen(file_name, "r");
 
     assert(test_file);
 
-    tests_res unittest_res = {true, 0, 0};
+    TestsRes unittest_res = {
+        .test_status = true,
+        .num_of_tests = 0,
+        .test_correct =  0
+    };
 
-    int test_num = 1;
+    int test_num = 0;
     bool test_status = true;
 
     TestEquation test;
 
     while (!read_test_from_file(test_file, &test, test_num)){
-        test_status = check_test(test_num, test);
+        test_status = check_test(test_num + 1, test);
 
         if (unittest_res.test_status){
             unittest_res.test_status = test_status;
@@ -26,13 +70,17 @@ tests_res run_unit_tests_from_txt(const char *file_name){
 
     fclose(test_file);
 
-    unittest_res.num_of_tests = test_num - 1;
+    unittest_res.num_of_tests = test_num;
 
     return unittest_res;
 }
 
-tests_res run_unit_tests_from_code(){
-    tests_res unittest_res = {true, 0, 0};
+TestsRes run_unit_tests_from_code(){
+    TestsRes unittest_res  = {
+        .test_status = true,
+        .num_of_tests = 0,
+        .test_correct =  0
+    };
 
     TestEquation tests[] = {
         {{0,    0,    0},          {INFINITY_ROOTS,  0,  0}},
@@ -45,7 +93,7 @@ tests_res run_unit_tests_from_code(){
         {{2,    2,    2},          {ZERO_ROOTS,      0,  0}}
     };
 
-    int num_of_tests = sizeof(tests) / sizeof (tests[0]);
+    int num_of_tests = sizeof(tests) / sizeof(tests[0]);
 
     bool test_status  = false;
 
@@ -63,8 +111,13 @@ tests_res run_unit_tests_from_code(){
     return unittest_res;
 }
 
-bool check_test(int test_num, TestEquation test){
-    AnsEquation ans_i = {ZERO_ROOTS, 0, 0};
+static bool check_test(int test_num, TestEquation test){
+    AnsEquation ans_i = {
+        .num_valid_ans = ZERO_ROOTS, 
+        .ans1 = 0, 
+        .ans2 = 0
+    };
+
     find_ans(test.equat, &ans_i);
 
     if (!check_ans(ans_i, test.ans)){
@@ -75,7 +128,7 @@ bool check_test(int test_num, TestEquation test){
     return true;
 }
 
-int print_error(int test_num, TestEquation test, AnsEquation ans){
+static int print_error(int test_num, TestEquation test, AnsEquation ans){
     printf(CONSOLE_RED " Test %d was failed:" CONSOLE_RESET " %.4lf %.4lf %.4lf \n",
            test_num, test.equat.a, test.equat.b, test.equat.c);
     printf("\t" CONSOLE_GREEN "expected ans: %14s %.4lf %.4lf\n" CONSOLE_RESET,
@@ -86,7 +139,18 @@ int print_error(int test_num, TestEquation test, AnsEquation ans){
     return 0;
 }
 
-const char* rootscount_to_string(RootsCount num){
+bool print_test_res(TestsRes result){
+    printf("Tests were complited\n Result: ");
+    if (result.test_status){
+        printf(CONSOLE_GREEN "\tTESTS PASSED: %d/%d\n" CONSOLE_RESET, result.test_correct, result.num_of_tests);
+    }
+    else{
+        printf(CONSOLE_RED "\tTESTS PASSED: %d/%d\n" CONSOLE_RESET, result.test_correct, result.num_of_tests);
+    }
+    return 0;
+}
+
+static const char* rootscount_to_string(RootsCount num){
     switch (num) {
         case ONE_ROOT:        return "ONE ROOT";
         case TWO_ROOTS:       return "TWO ROOTS";

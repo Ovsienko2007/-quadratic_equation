@@ -1,5 +1,25 @@
 #include "solving.h"
 
+/**
+ * @brief solves a linear equation
+ * 
+ * @param [in] equation coefficents of quadratic equation
+ * @param [out] ans     answer of quadratic equation
+ * 
+ * @return 0
+ */
+static int linear_equation(struct Equation equation, struct AnsEquation *ans);
+
+/**
+ * @brief solves a quadratic equation
+ * 
+ * @param [in] equation coefficents of quadratic equation
+ * @param [out] ans     answer of quadratic equation
+ * 
+ * @return 0
+ */
+static int quadratic_equation(struct Equation equation, struct AnsEquation *ans);
+
 int find_ans(Equation equation, AnsEquation *ans){
     assert(ans != NULL);
 
@@ -13,7 +33,7 @@ int find_ans(Equation equation, AnsEquation *ans){
     return 0;
 }
 
-int linear_equation(Equation equation, AnsEquation *ans){
+static int linear_equation(Equation equation, AnsEquation *ans){
     assert(ans != NULL);
 
     if (is_equal(equation.b, 0)){
@@ -32,7 +52,7 @@ int linear_equation(Equation equation, AnsEquation *ans){
     return 0;
 }
 
-int quadratic_equation(Equation equation, AnsEquation *ans){
+static int quadratic_equation(Equation equation, AnsEquation *ans){
     double dis = equation.b * equation.b - 4 * equation.a * equation.c;
 
     if (is_equal(dis, 0)){

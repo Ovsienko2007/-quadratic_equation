@@ -9,7 +9,7 @@ CFLAGS = -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef \
    -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits\
    -Wwrite-strings -Werror=vla -D_DEBUG -D_EJUDGE_CLIENT_SIDE
    
-OBJECTS = main.o args.o input.o unit_test.o solving.o output.o work_with_colors.o
+OBJECTS = main.o args.o input.o unit_test.o solving.o output.o work_with_colors.o my_assert.o
 EXECUTABLE_NAME = quadratic_equation.exe
 DIR_BUILD = Build
 DIR_SOURCE = Source

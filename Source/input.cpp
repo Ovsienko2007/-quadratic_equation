@@ -1,5 +1,35 @@
 #include "input.h"
 
+/**
+ * @brief clean buffer of stream
+ * 
+ * @param [in] stream stream
+ * 
+ * @return has the input in the stream ended
+*/
+static int clean_buffer(FILE *stream);
+
+/**
+ * @brief check is number not inf or NaN
+ * 
+ * @param [in] x number
+ * 
+ * @return is double not inf or NaN
+*/
+static bool check_not_inf_nan(double x);
+
+
+/**
+ * @brief Transform str to RootsCount
+ * 
+ * @param [in]  num        str
+ * @param [out] not_count  became true if num is not RootsCount
+ * 
+ * @return result of Transformation
+*/
+static RootsCount string_to_rootscount(const char *num, bool *not_count);
+
+
 bool input_equation(Equation *equation){
     bool flag = false;
 
@@ -22,28 +52,6 @@ bool input_equation(Equation *equation){
         return input_equation(equation);
     }
     return false;
-}
-
-bool check_not_inf_nan(double x){
-    if (isinf(x) || isnan(x)){
-        return true;
-    }
-
-    return false;
-}
-
-int clean_buffer(FILE *stream){
-    assert(stream);
-
-    int c = NULL;
-    do{
-        c = fgetc(stream);
-        if (c ==  EOF){
-            return 1;
-        }
-    } while (c != '\n');
-
-    return 0;
 }
 
 bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
@@ -70,7 +78,29 @@ bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
     return false;
 }
 
-RootsCount string_to_rootscount(const char *num, bool *not_count){
+static bool check_not_inf_nan(double x){
+    if (isinf(x) || isnan(x)){
+        return true;
+    }
+
+    return false;
+}
+
+static int clean_buffer(FILE *stream){
+    assert(stream);
+
+    int c = NULL;
+    do{
+        c = fgetc(stream);
+        if (c ==  EOF){
+            return 1;
+        }
+    } while (c != '\n');
+
+    return 0;
+}
+
+static RootsCount string_to_rootscount(const char *num, bool *not_count){
     if (strcmp("ONE_ROOT", num) == 0)        return ONE_ROOT;
     if (strcmp("TWO_ROOTS", num) == 0)       return TWO_ROOTS;
     if (strcmp("INFINITY_ROOTS", num) == 0)  return INFINITY_ROOTS;
