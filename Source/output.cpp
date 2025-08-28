@@ -1,6 +1,7 @@
 #include "output.h"
 
 bool print_ans(AnsEquation ans){
+    path_to_assert(ADD, __PRETTY_FUNCTION__);
     switch (ans.num_valid_ans){
         case ZERO_ROOTS:
             printf("The sequation has " CONSOLE_RED "no roots" CONSOLE_RESET "\n");
@@ -21,7 +22,11 @@ bool print_ans(AnsEquation ans){
         case INFINITY_ROOTS:
             printf(CONSOLE_GREEN "Infinite" CONSOLE_RESET " number of roots\n");
             break;
-
+        
+        case ERROR:
+            print_str(BOLD, RED,  YELLOW, "ERROR");
+            break;
+            
         default:
             print_str(BOLD, RED,  YELLOW, "ERROR");
             break;

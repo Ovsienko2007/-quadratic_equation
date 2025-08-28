@@ -11,6 +11,7 @@
 
 #include "stdio.h"
 
+#ifdef COLOR_PRINT
 /**
  * @brief macro to change the color of further text
  */
@@ -23,6 +24,19 @@
 #define CONSOLE_TURQUOISE  "\033[36m"
 #define CONSOLE_WHITE      "\033[37m"
 #define CONSOLE_RESET      "\033[39m"
+
+#else 
+
+#define CONSOLE_BLACK      ""
+#define CONSOLE_RED        ""
+#define CONSOLE_GREEN      ""
+#define CONSOLE_YELLOW     ""
+#define CONSOLE_BLUE       ""
+#define CONSOLE_PIRPLE     ""
+#define CONSOLE_TURQUOISE  ""
+#define CONSOLE_WHITE      ""
+#define CONSOLE_RESET      ""
+#endif
 
 /**
  * @brief reate colors to numbers

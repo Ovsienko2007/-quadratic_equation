@@ -37,6 +37,6 @@ bool run_unit_tests_from_code();
  * 
  * @return have all tests been passed
  */
-bool run_unit_tests_from_txt(const char *name);
+bool run_unit_tests_from_txt(FILE * test_file);
 
 #endif

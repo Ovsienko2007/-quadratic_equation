@@ -1,7 +1,6 @@
 #include "work_with_colors.h"
 
-const char* color_to_sescape_sequence(Color cl)
-{
+const char* color_to_sescape_sequence(Color cl){
     switch (cl){
         case BLACK:     return CONSOLE_BLACK;
         case RED:       return CONSOLE_RED;
@@ -16,13 +15,20 @@ const char* color_to_sescape_sequence(Color cl)
     }
 }
 
-int  print_str(TextFormat format, Color cl, Color bg, const char str[], ...) {
+int  print_str([[maybe_unused]] TextFormat format, [[maybe_unused]] Color cl, 
+               [[maybe_unused]] Color bg, const char str[], ...) {
     va_list param;
     va_start(param, str);
 
+#ifdef COLOR_PRINT
     printf("\033[%d;3%d;4%dm", format, cl, bg);
-    vprintf(str, param);
+#endif
+
+    vprintf(str, param); // vprintf
+
+#ifdef COLOR_PRINT
     printf("\033[0;39m");
+#endif
 
     va_end(param);
 

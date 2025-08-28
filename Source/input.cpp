@@ -27,10 +27,12 @@ static bool check_not_inf_nan(double x);
  * 
  * @return result of Transformation
 */
-static RootsCount string_to_rootscount(const char *num, bool *not_count);
+static RootsCount string_to_rootscount(const char *num);
 
-
+// TODO assert
 bool input_equation(Equation *equation){
+    path_to_assert(ADD, __PRETTY_FUNCTION__);
+
     bool flag = false;
 
     do{
@@ -52,25 +54,29 @@ bool input_equation(Equation *equation){
         return input_equation(equation);
     }
     return false;
+    
 }
 
 bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
+    path_to_assert(ADD, __PRETTY_FUNCTION__);
+
+    MY_ASSERT(test_file != NULL, 1);
     if (fscanf(test_file, "%lf %lf %lf", &(test->equat.a), &(test->equat.b), &(test->equat.c)) != 3){
         if (fgetc(test_file) != EOF){
             printf(CONSOLE_RED "Incorrect data entry line %d\n" CONSOLE_RED, line);
-            return clean_buffer(test_file);
         }
         return  clean_buffer(test_file);
     }
 
     char num_str_root_count[41] = {};
-    bool not_count = false;
 
     fscanf(test_file, "%40s", num_str_root_count);
 
-    test->ans.num_valid_ans = string_to_rootscount(num_str_root_count, &not_count);
+    test->ans.num_valid_ans = string_to_rootscount(num_str_root_count);
 
-    if (not_count || fscanf(test_file, "%lf %lf", &(test->ans.ans1), &(test->ans.ans2)) != 2){
+    if (test->ans.num_valid_ans == ERROR
+        || fscanf(test_file, "%lf %lf", &(test->ans.ans1), &(test->ans.ans2)) != 2){
+        
         printf(CONSOLE_RED "Incorrect data entry line %d\n" CONSOLE_RED, line);
         return clean_buffer(test_file);
     }
@@ -79,33 +85,29 @@ bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
 }
 
 static bool check_not_inf_nan(double x){
-    if (isinf(x) || isnan(x)){
-        return true;
-    }
-
-    return false;
+    return isinf(x) || isnan(x);
 }
 
 static int clean_buffer(FILE *stream){
+    path_to_assert(ADD, __PRETTY_FUNCTION__);
     MY_ASSERT(stream, 1);
 
-    int c = NULL;
+    int c = 0;
     do{
         c = fgetc(stream);
-        if (c ==  EOF){
-            return 1;
-        }
-    } while (c != '\n');
+    } while (c != '\n' && c != EOF);
 
-    return 0;
+    return c ==  EOF;
 }
 
-static RootsCount string_to_rootscount(const char *num, bool *not_count){
-    if (strcmp("ONE_ROOT", num) == 0)        return ONE_ROOT;
-    if (strcmp("TWO_ROOTS", num) == 0)       return TWO_ROOTS;
+static RootsCount string_to_rootscount(const char *num){
+    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    MY_ASSERT(num != NULL, ERROR);
+ 
+    if (strcmp("ONE_ROOT",       num) == 0)  return ONE_ROOT;
+    if (strcmp("TWO_ROOTS",      num) == 0)  return TWO_ROOTS;
     if (strcmp("INFINITY_ROOTS", num) == 0)  return INFINITY_ROOTS;
-    if (strcmp("ZERO_ROOTS", num) == 0)      return ZERO_ROOTS;
+    if (strcmp("ZERO_ROOTS",     num) == 0)  return ZERO_ROOTS;
 
-    *not_count  = true;
-    return ZERO_ROOTS;
+    return ERROR;
 }

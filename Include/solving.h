@@ -23,7 +23,8 @@ enum RootsCount
     ONE_ROOT,
     TWO_ROOTS,
     INFINITY_ROOTS,
-    ZERO_ROOTS
+    ZERO_ROOTS,
+    ERROR
 };
 /**
  * @brief contain coefficents of quadratic equation

@@ -9,8 +9,10 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "my_assert.h"
+
 /**
- * @brief checks for argument when starting a program
+ * @brief checks for argument when starting data program
  * 
  * @param [in] argc number of argument
  * @param [in] argv list of arguments

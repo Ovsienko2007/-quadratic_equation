@@ -5,11 +5,14 @@
 #include "work_with_colors.h"
 #include "args.h"
 #include "my_assert.h"
+//TODO Бэктрейс
 
 int main(int argc, char *argv[]){
-    //MY_ASSERT(2 < 1, 0);
+    path_to_assert(CREAT);
+    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    
     if (check_argument(argc, argv, "--embedded-test")){
-        return run_unit_tests_from_code();
+        return !run_unit_tests_from_code();
     }
 
     if (char **option_ptr = check_argument(argc, argv, "--file-test")){
@@ -21,7 +24,14 @@ int main(int argc, char *argv[]){
             return 0;
         }
 
-        return run_unit_tests_from_txt(file_name);
+        FILE * test_file = fopen(file_name, "r");
+
+        if (test_file == NULL){
+            printf("There is no file with name %s", file_name);
+            return 0;
+        }
+
+        return !run_unit_tests_from_txt(test_file);
     }
 
     Equation equation = {};
