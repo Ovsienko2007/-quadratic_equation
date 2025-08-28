@@ -40,8 +40,19 @@ static bool check_ans(AnsEquation x, AnsEquation y);
  */
 static const char* rootscount_to_string(RootsCount num);
 
-TestsRes run_unit_tests_from_txt(const char *file_name){
+/**
+ * @brief print res of unittest
+ * 
+ * @param [in] result result of test
+ * 
+ * @return 0 when output will be completed
+ */
+static bool print_test_res(TestsRes result);
+
+bool run_unit_tests_from_txt(const char *file_name){
     FILE * test_file  = fopen(file_name, "r");
+
+    MY_ASSERT(test_file != NULL, 1);
 
     assert(test_file);
 
@@ -72,10 +83,12 @@ TestsRes run_unit_tests_from_txt(const char *file_name){
 
     unittest_res.num_of_tests = test_num;
 
-    return unittest_res;
+    print_test_res(unittest_res);
+
+    return unittest_res.test_correct;
 }
 
-TestsRes run_unit_tests_from_code(){
+bool run_unit_tests_from_code(){
     TestsRes unittest_res  = {
         .test_status = true,
         .num_of_tests = 0,
@@ -108,7 +121,9 @@ TestsRes run_unit_tests_from_code(){
 
     unittest_res.num_of_tests = num_of_tests;
 
-    return unittest_res;
+    print_test_res(unittest_res);
+
+    return unittest_res.test_correct;
 }
 
 static bool check_test(int test_num, TestEquation test){

@@ -87,7 +87,7 @@ static bool check_not_inf_nan(double x){
 }
 
 static int clean_buffer(FILE *stream){
-    assert(stream);
+    MY_ASSERT(stream, 1);
 
     int c = NULL;
     do{

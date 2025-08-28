@@ -8,6 +8,7 @@
 
 #include <assert.h>
 #include <math.h>
+#include <my_assert.h>
 
 /**
  * @brief permissible error in comparing double numbers

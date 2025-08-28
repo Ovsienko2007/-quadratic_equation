@@ -14,6 +14,7 @@
 #include "work_with_colors.h"
 #include "solving.h"
 #include "input.h"
+#include "my_assert.h"
 
 /**
  * @brief contains the test result, the number of correct tests and the total number of tests
@@ -29,22 +30,13 @@ struct TestsRes{
  * 
  * @return have all tests been passed
  */
-TestsRes run_unit_tests_from_code();
+bool run_unit_tests_from_code();
 
 /**
  * @brief checks the work of solving the equation by tests from file
  * 
  * @return have all tests been passed
  */
-TestsRes run_unit_tests_from_txt(const char *name);
-
-/**
- * @brief print res of unittest
- * 
- * @param [in] result result of test
- * 
- * @return 0 when output will be completed
- */
-bool print_test_res(TestsRes result);
+bool run_unit_tests_from_txt(const char *name);
 
 #endif

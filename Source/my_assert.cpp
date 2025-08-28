@@ -1,8 +1,10 @@
 #include "my_assert.h"
      
-void print_assert(const char *file_name, int expect_line_num){
+void print_assert(const char *file_name, const char *function_name, int expect_line_num){
 
-    printf(CONSOLE_RED "FILE NAME: %s, LINE: %d\n" CONSOLE_RESET , file_name,  expect_line_num);
+    printf(CONSOLE_RED "In function %s\n"
+                       "Assert worked %s:%d\n" CONSOLE_RESET,
+          function_name, file_name,  expect_line_num);
 
     FILE *code_file = fopen(file_name, "r");
 

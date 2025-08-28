@@ -21,20 +21,18 @@ static int linear_equation(struct Equation equation, struct AnsEquation *ans);
 static int quadratic_equation(struct Equation equation, struct AnsEquation *ans);
 
 int find_ans(Equation equation, AnsEquation *ans){
-    assert(ans != NULL);
+    MY_ASSERT(ans != NULL, 1);
 
     if (is_equal(equation.a, 0)){
-        linear_equation(equation, ans);
+        return linear_equation(equation, ans);
     }
     else{
-        quadratic_equation(equation, ans);
+        return quadratic_equation(equation, ans);
     }
-
-    return 0;
 }
 
 static int linear_equation(Equation equation, AnsEquation *ans){
-    assert(ans != NULL);
+    MY_ASSERT(ans != NULL, 1);
 
     if (is_equal(equation.b, 0)){
         if (is_equal(equation.c, 0)){
@@ -53,6 +51,8 @@ static int linear_equation(Equation equation, AnsEquation *ans){
 }
 
 static int quadratic_equation(Equation equation, AnsEquation *ans){
+    MY_ASSERT(ans != NULL, 1);
+
     double dis = equation.b * equation.b - 4 * equation.a * equation.c;
 
     if (is_equal(dis, 0)){

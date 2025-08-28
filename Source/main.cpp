@@ -7,14 +7,13 @@
 #include "my_assert.h"
 
 int main(int argc, char *argv[]){
-    MY_ASSERT(2 < 1, 0);
+    //MY_ASSERT(2 < 1, 0);
     if (check_argument(argc, argv, "--embedded-test")){
-        print_test_res(run_unit_tests_from_code());
-        return 0;
-
+        return run_unit_tests_from_code();
     }
 
     if (char **option_ptr = check_argument(argc, argv, "--file-test")){
+
         const char *file_name = get_option_argument(argc, argv, option_ptr);
 
         if (!file_name){
@@ -22,9 +21,7 @@ int main(int argc, char *argv[]){
             return 0;
         }
 
-        print_test_res(run_unit_tests_from_txt(file_name));
-
-        return 0;
+        return run_unit_tests_from_txt(file_name);
     }
 
     Equation equation = {};
@@ -38,7 +35,10 @@ int main(int argc, char *argv[]){
         return 0;
     }
 
-    find_ans(equation, &ans);
+    if (find_ans(equation, &ans)){
+        printf("ERROR");
+        return 1; 
+    }
 
     minus_zero_to_zero(&ans.ans1);
     minus_zero_to_zero(&ans.ans2);
