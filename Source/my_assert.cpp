@@ -5,29 +5,28 @@
 static Stack creat_stack(){
     Stack stack;
 
-    stack.n = 0;
-    stack.size = sizeof(char**);
-    stack.data = (const char **)calloc(stack.n, stack.size);
+    stack.size = 0;
+    stack.data = (const char **)calloc(stack.size, size_path);
     
     return stack;
 }
 
 static Stack stack = creat_stack();
 
-int add_func(const char* str){
-    const char** new_data = (const char**)realloc(stack.data, stack.size * (stack.n + 1));
+int push_func(const char* str){
+    const char** new_data = (const char**)realloc(stack.data, size_path * (stack.size + 1));
 
     MY_ASSERT(new_data != NULL, 1);
 
     stack.data = new_data;
 
-    stack.data[stack.n] = str;
-    stack.n++;
+    stack.data[stack.size] = str;
+    stack.size++;
     return 0;
 }
 
 int print_stack(){    
-    for (unsigned int i = 0; i < stack.n; i++){
+    for (unsigned int i = 0; i < stack.size; i++){
         printf(" %s\n", stack.data[i]);
     }
 
@@ -37,7 +36,7 @@ int print_stack(){
 int clean_stack(const char *func){
     bool func_in_data = false;
     unsigned int new_size = 0;
-    for (new_size = 0; new_size <= stack.n; new_size++){
+    for (new_size = 0; new_size <= stack.size; new_size++){
         if (strcmp(func, stack.data[new_size]) == 0){
             func_in_data = true;
             break;
@@ -48,22 +47,22 @@ int clean_stack(const char *func){
     }
     new_size++;
 
-    const char** new_data = (const char**)realloc(stack.data, stack.size * (new_size));
+    const char** new_data = (const char**)realloc(stack.data, size_path * (new_size));
 
     MY_ASSERT(new_data != NULL, 1);
 
     stack.data = new_data;
 
-    stack.n = new_size;
+    stack.size = new_size;
     return 0;
 }
 
 int stack_pop(){
-    const char** new_data = (const char**)realloc(stack.data, stack.size * (stack.n - 1));
+    const char** new_data = (const char**)realloc(stack.data, size_path * (stack.size - 1));
     MY_ASSERT(new_data != NULL, 1);
 
     stack.data = new_data;
-    stack.n--;
+    stack.size--;
     return 0;
 
 }

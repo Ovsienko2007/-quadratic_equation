@@ -12,10 +12,12 @@
 
 #include "work_with_colors.h"
 
-#define ADD_PATH_TO_ASSERT add_func(__FUNCTION__)
+#define ADD_PATH_TO_ASSERT push_func(__FUNCTION__)
 #define POP_ASSERT         stack_pop()
 #define ASSERT_CLEAN       clean_stack(__FUNCTION__)
 #define PRINT_PATH         print_stack()
+
+const size_t size_path = sizeof(const char **);
 
 /**
  * @brief commands wich we can use with stack
@@ -32,8 +34,7 @@ enum COMMAND_STACK{
  */
 struct Stack{
     const char **data;
-    unsigned int n;
-    size_t size;
+    unsigned int size;
 };
 
 /**
@@ -82,7 +83,7 @@ int clean_stack(const char *func);
  * 
  * @return 0
  */
-int add_func(const char* str);
+int push_func(const char* str);
 
 /**
  * @brief print path to assert
