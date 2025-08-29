@@ -30,9 +30,10 @@ int main(int argc, char *argv[]){
 
         return test_file(file_name);
     }
+
     ASSERT_CLEAN;
 
-    program();
+    run_program();
     ASSERT_CLEAN;
     
     return 0;

@@ -21,6 +21,7 @@ static int linear_equation(struct Equation equation, struct AnsEquation *ans);
 static int quadratic_equation(struct Equation equation, struct AnsEquation *ans);
 
 int find_ans(Equation equation, AnsEquation *ans){
+
     ADD_PATH_TO_ASSERT;
     MY_ASSERT(ans != NULL, 1);
 
@@ -30,6 +31,7 @@ int find_ans(Equation equation, AnsEquation *ans){
     else{
         return quadratic_equation(equation, ans);
     }
+    
 }
 
 static int linear_equation(Equation equation, AnsEquation *ans){
@@ -45,7 +47,7 @@ static int linear_equation(Equation equation, AnsEquation *ans){
         }
     }
     else{
-        ans->ans2 = ans->ans1 = -equation.c / equation.b;
+        ans->ans2.Re = ans->ans1.Re = -equation.c / equation.b;
         ans->num_valid_ans = ONE_ROOT;
     }
 
@@ -53,24 +55,31 @@ static int linear_equation(Equation equation, AnsEquation *ans){
 }
 
 static int quadratic_equation(Equation equation, AnsEquation *ans){
-    ASSERT_CLEAN;
+    ADD_PATH_TO_ASSERT;
     MY_ASSERT(ans != NULL, 1);
 
     double dis = equation.b * equation.b - 4 * equation.a * equation.c;
 
     if (is_equal(dis, 0)){
-        ans->ans1 = ans->ans2 = (-equation.b) / 2 / equation.a;
+        ans->ans1.Re = ans->ans2.Re = (-equation.b) / 2 / equation.a;
         ans->num_valid_ans = ONE_ROOT;
     }
 
-    else if (dis < -EPS){
-        ans->num_valid_ans = ZERO_ROOTS;
+    else if (dis < 0){
+        ans->ans1.Re = ans->ans2.Re = -equation.b / 2 / equation.a;
+
+        double sqrt_dis = sqrt(-dis);
+
+        ans->ans1.Im = -sqrt_dis / 2 / equation.a;
+        ans->ans2.Im =  sqrt_dis / 2 / equation.a;
+        
+        ans->num_valid_ans = TWO_ROOTS;
     }
 
     else{
         double sqrt_dis = sqrt(dis);
-        ans->ans1 = (-equation.b - sqrt_dis) / 2 / equation.a;
-        ans->ans2 = (-equation.b + sqrt_dis) / 2 / equation.a;
+        ans->ans1.Re = (-equation.b - sqrt_dis) / 2 / equation.a;
+        ans->ans2.Re = (-equation.b + sqrt_dis) / 2 / equation.a;
         ans->num_valid_ans = TWO_ROOTS;
     }
 

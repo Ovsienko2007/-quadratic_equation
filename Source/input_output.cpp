@@ -1,5 +1,7 @@
 #include "input_output.h"
 
+static RootsCount string_to_rootscount(const char *num);
+
 /**
  * @brief check is number not inf or NaN
  * 
@@ -18,7 +20,7 @@ static bool check_not_inf_nan(double x);
  * 
  * @return result of Transformation
 */
-static RootsCount string_to_rootscount(const char *num);
+// static RootsCount string_to_rootscount(const char *num);
 
 // TODO assert
 bool input_equation(Equation *equation){
@@ -53,9 +55,11 @@ bool input_equation(Equation *equation){
 bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
     ADD_PATH_TO_ASSERT;
     MY_ASSERT(test_file != NULL, 1);
+
     if (fscanf(test_file, "%lf %lf %lf", &(test->equat.a), &(test->equat.b), &(test->equat.c)) != 3){
+        
         if (fgetc(test_file) != EOF){
-            printf(CONSOLE_RED "Incorrect data entry line %d\n" CONSOLE_RED, line);
+            printf(CONSOLE_RED "Incorrect data entry line %d\n" CONSOLE_RED, line + 1);
         }
         return  clean_buffer(test_file);
     }
@@ -66,16 +70,49 @@ bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
 
     test->ans.num_valid_ans = string_to_rootscount(num_str_root_count);
     ASSERT_CLEAN;
+    if (test->ans.num_valid_ans != ERROR){
+        bool x = true;
+        char qwe[2] = {};
+        if (x){
+            x = fscanf(test_file, "%lf", &(test->ans.ans1.Re));
+        }
+        fscanf(test_file, "%1s", qwe);
 
-    if (test->ans.num_valid_ans == ERROR
-        || fscanf(test_file, "%lf %lf", &(test->ans.ans1), &(test->ans.ans2)) != 2){
+        if (x){
+            fscanf(test_file, "%lf", &(test->ans.ans1.Im));
+        }
+
+        if (qwe[0] == '-'){
+            test->ans.ans1.Im = - test->ans.ans1.Im; 
+        }
         
-        printf(CONSOLE_RED "Incorrect data entry line %d\n" CONSOLE_RED, line);
-        return clean_buffer(test_file);
+        fscanf(test_file, "%1s", qwe);
+
+        if (x){
+            x = fscanf(test_file, "%lf", &(test->ans.ans2.Re));
+        }
+        fscanf(test_file, "%1s", qwe);
+        
+
+        if (x){
+            fscanf(test_file, "%lf", &(test->ans.ans2.Im));
+        }
+
+        if (qwe[0] == '-'){
+            test->ans.ans2.Im = - test->ans.ans2.Im; 
+        }
+        
+        fscanf(test_file, "%1s", qwe);
+
+        if (!x){
+            printf(CONSOLE_RED "Incorrect data entry line %d\n" CONSOLE_RESET, line + 1);
+            return clean_buffer(test_file);
+        }   
     }
 
     return false;
 }
+
 
 static bool check_not_inf_nan(double x){
     return isinf(x) || isnan(x);
@@ -114,14 +151,17 @@ bool print_ans(AnsEquation ans){
 
         case ONE_ROOT:
             printf("There is 1 root:\n"
-                   "   ans = " CONSOLE_GREEN "%0.3lf" CONSOLE_RESET "\n", ans.ans1);
+                   "   ans = " CONSOLE_GREEN "%0.3lf + %0.3fi" CONSOLE_RESET "\n", ans.ans1.Re, ans.ans2.Im);
             break;
 
         case TWO_ROOTS:
             printf("There are 2 roots:\n"
-                  "   ans1 = " CONSOLE_GREEN "%0.3lf" CONSOLE_RESET "\n"
-                  "   ans1 = " CONSOLE_GREEN "%0.3lf" CONSOLE_RESET "\n",
-                  ans.ans1, ans.ans2);
+                   "   ans1 = " CONSOLE_GREEN);
+            print_complex_num(ans.ans1);
+            printf("\n" CONSOLE_RESET);
+            printf("   ans2 = " CONSOLE_GREEN);
+            print_complex_num(ans.ans2);
+            printf("\n" CONSOLE_RESET);
             break;
 
         case INFINITY_ROOTS:
@@ -138,4 +178,13 @@ bool print_ans(AnsEquation ans){
     }
 
     return 0;
+}
+
+void print_complex_num(complex_num num){
+    printf("%10.3lf", num.Re);
+    if (num.Im >= 0){
+        printf(" + %.3lfi", num.Im);
+    } else{
+        printf(" - %.3lfi", -num.Im);
+    }
 }

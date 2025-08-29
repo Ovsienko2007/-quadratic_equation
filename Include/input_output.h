@@ -62,4 +62,6 @@ int clean_buffer(FILE *stream);
  * The answer is highlighted in color
  */
 bool print_ans(struct AnsEquation ans);
+
+void print_complex_num(complex_num num);
 #endif

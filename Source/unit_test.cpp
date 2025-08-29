@@ -1,5 +1,6 @@
 #include "unit_test.h"
 
+
 /**
  * @brief checks the work of solving the equation
  * 
@@ -67,8 +68,10 @@ bool run_unit_tests_from_txt(FILE * test_file){
     TestEquation test;
 
     while (!read_test_from_file(test_file, &test, test_num)){
+
         test_status = check_test(test_num + 1, test);
         ASSERT_CLEAN;
+        
 
         if (unittest_res.test_status){
             unittest_res.test_status = test_status;
@@ -98,18 +101,19 @@ bool run_unit_tests_from_code(){
     };
 
     TestEquation tests[] = {
-        {{0,    0,    0},          {INFINITY_ROOTS,  0,  0}},
-        {{1,    0,    0},          {ONE_ROOT,        0,  0}},
-        {{0,    1,    0},          {ONE_ROOT,        0,  0}},
-        {{1,    4,    4},          {ONE_ROOT,       -2, -2}},
-        {{1,    5,   -6},          {TWO_ROOTS,      -6,  1}},
-        {{1.3, -1.3, -2.6},        {TWO_ROOTS,      -1,  2}},
-        {{0,    0,    1},          {ZERO_ROOTS,      0,  0}},
-        {{2,    2,    2},          {ZERO_ROOTS,      0,  0}}
+        {{0,    0,    0},          {INFINITY_ROOTS,  { 0,  0},  { 0,  0} }},
+        {{1,    0,    0},          {ONE_ROOT,        { 0,  0},  { 0,  0} }},
+        {{0,    1,    0},          {ONE_ROOT,        { 0,  0},  { 0,  0} }},
+        {{1,    4,    4},          {ONE_ROOT,        {-2,  0},  {-2,  0} }},
+        {{1,    5,   -6},          {TWO_ROOTS,       {-6,  0},  { 1,  0} }},
+        {{1.3, -1.3, -2.6},        {TWO_ROOTS,       {-1,  0},  { 2,  0} }},
+        {{0,    0,    1},          {ZERO_ROOTS,      { 0,  0},  { 0,  0} }},
+        {{1,    2,    2},          {TWO_ROOTS,       {-1, -1},  {-1,  1} }}
     };
 
     int num_of_tests = sizeof(tests) / sizeof(tests[0]);
 
+    
     bool test_status  = false;
 
     for (int test_num = 0; test_num < num_of_tests; test_num++){
@@ -134,13 +138,13 @@ static bool check_test(int test_num, TestEquation test){
     ADD_PATH_TO_ASSERT;
     AnsEquation ans_i = {
         .num_valid_ans = ZERO_ROOTS, 
-        .ans1 = 0, 
-        .ans2 = 0
+        .ans1 = {0, 0}, 
+        .ans2 = {0, 0}
     };
 
     find_ans(test.equat, &ans_i);
     ASSERT_CLEAN;
-
+    
     if (!check_ans(ans_i, test.ans)){
         print_error(test_num, test, ans_i);
         ASSERT_CLEAN;
@@ -154,10 +158,16 @@ static int print_error(int test_num, TestEquation test, AnsEquation ans){
     ADD_PATH_TO_ASSERT;
     printf(CONSOLE_RED " Test %d was failed:" CONSOLE_RESET " %.4lf %.4lf %.4lf \n",
            test_num, test.equat.a, test.equat.b, test.equat.c);
-    printf("\t" CONSOLE_GREEN "expected ans: %14s %.4lf %.4lf\n" CONSOLE_RESET,
-            rootscount_to_string(test.ans.num_valid_ans), test.ans.ans1, test.ans.ans2);
-    printf("\t" CONSOLE_YELLOW "received ans: %14s %.4lf %.4lf\n" CONSOLE_RESET,\
-            rootscount_to_string(ans.num_valid_ans), ans.ans1, ans.ans2);
+    printf("\t" CONSOLE_GREEN "expected ans: %14s",  rootscount_to_string(test.ans.num_valid_ans));
+    print_complex_num(test.ans.ans1);
+    print_complex_num(test.ans.ans2);
+    printf("\n" CONSOLE_RESET);
+
+    printf("\t" CONSOLE_YELLOW "received ans: %14s",  rootscount_to_string(ans.num_valid_ans));
+    print_complex_num(ans.ans1);
+    print_complex_num(ans.ans2);
+    printf("\n" CONSOLE_RESET);
+
     printf("______________________________________________________________\n");
     return 0;
 }
@@ -192,9 +202,10 @@ bool check_ans(AnsEquation x, AnsEquation y){
     if (x.num_valid_ans == y.num_valid_ans){
         if (x.num_valid_ans == INFINITY_ROOTS || x.num_valid_ans == ZERO_ROOTS){
             return true;
-        } else if (x.num_valid_ans == ONE_ROOT && is_equal(x.ans1, y.ans1)){
+        } else if (x.num_valid_ans == ONE_ROOT && is_equal(x.ans1.Re, y.ans1.Re) && is_equal(x.ans1.Im, y.ans1.Im)){
             return true;
-        } else if(is_equal(x.ans1, y.ans1) && is_equal(x.ans2, y.ans2)){
+        } else if(is_equal(x.ans1.Re, y.ans1.Re) && is_equal(x.ans1.Im, y.ans1.Im) 
+               && is_equal(x.ans2.Re, y.ans2.Re) && is_equal(x.ans2.Im, y.ans2.Im)){
             return true;
         }
     }

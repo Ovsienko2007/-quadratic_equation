@@ -83,7 +83,7 @@ int run_console(){ // TODO runConsole
 static int run_commands(char *command){
     ADD_PATH_TO_ASSERT;
     if (strcmp(command, "s") == 0){
-        if (program()){
+        if (run_program()){
             printf("ERROR");
         }
         ASSERT_CLEAN;
@@ -121,14 +121,26 @@ static int run_commands(char *command){
     return 1;
 }
 
+int test_file(const char * file_name){
+    ADD_PATH_TO_ASSERT;
+    FILE * test_file = fopen(file_name, "r");
 
-int program(){
+    if (test_file == NULL){
+        printf("There is no file with name %s\n", file_name);
+        return 0;
+    }
+
+    return !run_unit_tests_from_txt(test_file);
+
+}
+
+int run_program(){
     ADD_PATH_TO_ASSERT;
     Equation equation = {};
     AnsEquation ans = {
         .num_valid_ans = ZERO_ROOTS,
-        .ans1 = 0,
-        .ans2 = 0
+        .ans1 = {.Re = 0, .Im = 0},
+        .ans2 = {.Re = 0, .Im = 0}
     };
 
     if (input_equation(&equation)){
@@ -140,24 +152,12 @@ int program(){
         return 1; 
     }
 
-    minus_zero_to_zero(&ans.ans1);
+    minus_zero_to_zero(&ans.ans1.Re);
     ASSERT_CLEAN;
-    minus_zero_to_zero(&ans.ans2);
+    minus_zero_to_zero(&ans.ans2.Re);
     ASSERT_CLEAN;
 
     print_ans(ans);
     ASSERT_CLEAN;
     return 0;
-}
-
-int test_file(const char * file_name){
-    ADD_PATH_TO_ASSERT;
-    FILE * test_file = fopen(file_name, "r");
-
-    if (test_file == NULL){
-        printf("There is no file with name %s\n", file_name);
-        return 0;
-    }
-
-    return !run_unit_tests_from_txt(test_file);
 }

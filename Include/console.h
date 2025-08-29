@@ -24,7 +24,7 @@ int run_console();
  * 
  * @return execution status
  */
-int program();
+int run_program();
 
 /**
  * @brief start unit tests from file
@@ -34,7 +34,5 @@ int program();
  * @return unit tests status
  */
 int test_file(const char * file_name);
-
-void print_help();
 
 #endif

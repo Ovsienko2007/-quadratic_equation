@@ -13,7 +13,7 @@ static Stack creat_stack(){
 
 static Stack stack = creat_stack();
 
-int push_func(const char* str){
+int push_func(const char* str){ 
     const char** new_data = (const char**)realloc(stack.data, size_path * (stack.size + 1));
 
     MY_ASSERT(new_data != NULL, 1);
@@ -25,7 +25,7 @@ int push_func(const char* str){
     return 0;
 }
 
-int print_stack(){    
+int print_stack(){  
     for (unsigned int i = 0; i < stack.size; i++){
         printf(" %s\n", stack.data[i]);
     }

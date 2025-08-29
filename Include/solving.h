@@ -10,6 +10,11 @@
 #include <math.h>
 #include <my_assert.h>
 
+struct complex_num{
+    double Re;
+    double Im;
+};
+
 /**
  * @brief permissible error in comparing double numbers
  */
@@ -40,8 +45,8 @@ struct Equation{
  */
 struct AnsEquation{
     RootsCount num_valid_ans;
-    double ans1;
-    double ans2;
+    complex_num ans1;
+    complex_num ans2;
 };
 
 /**
