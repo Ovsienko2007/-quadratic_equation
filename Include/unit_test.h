@@ -13,7 +13,7 @@
 #include "solving.h"
 #include "work_with_colors.h"
 #include "solving.h"
-#include "input.h"
+#include "input_output.h"
 #include "my_assert.h"
 
 /**

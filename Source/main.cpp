@@ -1,6 +1,5 @@
-#include "input.h"
+#include "input_output.h"
 #include "solving.h"
-#include "output.h"
 #include "unit_test.h"
 #include "work_with_colors.h"
 #include "args.h"

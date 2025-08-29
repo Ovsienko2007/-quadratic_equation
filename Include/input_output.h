@@ -51,4 +51,15 @@ bool read_test_from_file(FILE *fin, TestEquation *test, int line);
  * @return has the input in the stream ended
 */
 int clean_buffer(FILE *stream);
+
+/**
+ * @brief print answer of quadratic equation
+ * 
+ * @param [in] ans contains answer of quardic equation
+ * 
+ * @return 0 when output will be completed
+ * 
+ * The answer is highlighted in color
+ */
+bool print_ans(struct AnsEquation ans);
 #endif
