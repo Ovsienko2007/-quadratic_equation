@@ -5,7 +5,7 @@
 #include "work_with_colors.h"
 #include "args.h"
 #include "my_assert.h"
-//TODO Бэктрейс
+#include "consol.h"
 
 int main(int argc, char *argv[]){
     path_to_assert(CREAT);
@@ -13,6 +13,10 @@ int main(int argc, char *argv[]){
     
     if (check_argument(argc, argv, "--embedded-test")){
         return !run_unit_tests_from_code();
+    }
+    
+    if (check_argument(argc, argv, "--consol")){
+        return consol();
     }
 
     if (char **option_ptr = check_argument(argc, argv, "--file-test")){
@@ -24,36 +28,10 @@ int main(int argc, char *argv[]){
             return 0;
         }
 
-        FILE * test_file = fopen(file_name, "r");
-
-        if (test_file == NULL){
-            printf("There is no file with name %s", file_name);
-            return 0;
-        }
-
-        return !run_unit_tests_from_txt(test_file);
+        return test_file(file_name);
     }
 
-    Equation equation = {};
-    AnsEquation ans = {
-        .num_valid_ans = ZERO_ROOTS,
-        .ans1 = 0,
-        .ans2 = 0
-    };
-
-    if (input_equation(&equation)){
-        return 0;
-    }
-
-    if (find_ans(equation, &ans)){
-        printf("ERROR");
-        return 1; 
-    }
-
-    minus_zero_to_zero(&ans.ans1);
-    minus_zero_to_zero(&ans.ans2);
-
-    print_ans(ans);
+    program();
 
     return 0;
 }

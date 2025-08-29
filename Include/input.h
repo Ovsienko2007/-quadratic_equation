@@ -42,4 +42,13 @@ bool input_equation(Equation *equation);
  * @return 0 if input is completed without obtaining the required values, 1 otherwise
 */
 bool read_test_from_file(FILE *fin, TestEquation *test, int line);
+
+/**
+ * @brief clean buffer of stream
+ * 
+ * @param [in] stream stream
+ * 
+ * @return has the input in the stream ended
+*/
+int clean_buffer(FILE *stream);
 #endif

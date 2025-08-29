@@ -1,7 +1,16 @@
 #include "my_assert.h"
 
+/**
+ * @brief add name of function in stack
+ * 
+ * @param [in] stack  path to assert
+ * @param [in] str     new file
+ * 
+ * @return 0
+ */
 static int add_funk(Stack *stack, const char* str){
     const char** new_data = (const char**)realloc(stack->data, stack->size * (stack->n + 1));
+
     MY_ASSERT(new_data != NULL, 1);
 
     stack->data = new_data;
@@ -11,9 +20,14 @@ static int add_funk(Stack *stack, const char* str){
     return 0;
 }
 
-static int print_stack(Stack stack){
-    printf("%d", stack.n);
-    
+/**
+ * @brief print path to assert
+ * 
+ * @param [in] stack    path to asxsert
+ * 
+ * @return 0
+ */
+static int print_stack(Stack stack){    
     for (unsigned int i = 0; i < stack.n; i++){
         printf(" %s\n", stack.data[i]);
     }
@@ -21,6 +35,13 @@ static int print_stack(Stack stack){
     return 0;
 }
 
+/**
+ * @brief delite the last elem of path
+ * 
+ * @param [in] stack    path to assert
+ * 
+ * @return 0
+ */
 static int stack_pop(Stack *stack){
     const char** new_data = (const char**)realloc(stack->data, stack->size * (stack->n - 1));
     MY_ASSERT(new_data != NULL, 1);
@@ -40,9 +61,7 @@ void print_assert(const char *file_name, const char *function_name, int expect_l
 
     FILE *code_file = fopen(file_name, "r");
 
-    char line[str_len] = {}; // TODO dynamic allocation (calloc, free)
-    
-    // TODO scanf %ms
+    char line[str_len] = {};
     
     int line_num = 0;
     while (fgets(line, str_len, code_file) != NULL ){

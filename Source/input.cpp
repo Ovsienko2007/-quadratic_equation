@@ -1,15 +1,6 @@
 #include "input.h"
 
 /**
- * @brief clean buffer of stream
- * 
- * @param [in] stream stream
- * 
- * @return has the input in the stream ended
-*/
-static int clean_buffer(FILE *stream);
-
-/**
  * @brief check is number not inf or NaN
  * 
  * @param [in] x number
@@ -88,7 +79,7 @@ static bool check_not_inf_nan(double x){
     return isinf(x) || isnan(x);
 }
 
-static int clean_buffer(FILE *stream){
+int clean_buffer(FILE *stream){
     path_to_assert(ADD, __PRETTY_FUNCTION__);
     MY_ASSERT(stream, 1);
 

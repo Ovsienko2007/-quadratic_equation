@@ -12,18 +12,28 @@
 
 #include "work_with_colors.h"
 
+/**
+ * @brief commands wich we can use with stack
+ */
 enum COMMAND_STACK{
     CREAT,
     ADD,
     POP,
     PRINT
 };
+
+/**
+ * @brief stack
+ */
 struct Stack{
     const char **data;
     unsigned int n;
     size_t size;
 };
 
+/**
+ * @brief max string size
+ */
 const int str_len = 1000;
 
 /**
@@ -46,6 +56,14 @@ void print_assert(const char *file_name, const char *function_name, int expect_l
 if (!(condition)) {                                              \
     print_assert(__FILE__, __PRETTY_FUNCTION__, __LINE__);       \
     return return_value;                                         \
-}           
+} 
+
+/**
+ * @brief work with path to assert
+ * 
+ * @param [in] command         the command we execute with the path
+ * @param [in] ...             elementwich we put in the path (may be unused)
+ */
 void path_to_assert(COMMAND_STACK command, ...);
+
 #endif
