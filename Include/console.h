@@ -13,11 +13,11 @@
 const int max_len = 101;
 
 /**
- * @brief  creat consol
+ * @brief  creat console
  * 
  * @return 0
  */
-int consol();
+int run_console();
 
 /**
  * @brief starts standard execution
@@ -34,5 +34,7 @@ int program();
  * @return unit tests status
  */
 int test_file(const char * file_name);
+
+void print_help();
 
 #endif

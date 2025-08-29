@@ -50,7 +50,7 @@ static const char* rootscount_to_string(RootsCount num);
 static bool print_test_res(TestsRes result);
 
 bool run_unit_tests_from_txt(FILE * test_file){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     MY_ASSERT(test_file != NULL, 1);
 
     assert(test_file);
@@ -68,6 +68,7 @@ bool run_unit_tests_from_txt(FILE * test_file){
 
     while (!read_test_from_file(test_file, &test, test_num)){
         test_status = check_test(test_num + 1, test);
+        ASSERT_CLEAN;
 
         if (unittest_res.test_status){
             unittest_res.test_status = test_status;
@@ -83,12 +84,13 @@ bool run_unit_tests_from_txt(FILE * test_file){
     unittest_res.num_of_tests = test_num;
 
     print_test_res(unittest_res);
+    ASSERT_CLEAN;
 
     return unittest_res.test_correct;
 }
 
 bool run_unit_tests_from_code(){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     TestsRes unittest_res  = {
         .test_status = true,
         .num_of_tests = 0,
@@ -112,6 +114,7 @@ bool run_unit_tests_from_code(){
 
     for (int test_num = 0; test_num < num_of_tests; test_num++){
         test_status = check_test(test_num + 1, tests[test_num]);
+        ASSERT_CLEAN;
 
         if (unittest_res.test_status){
             unittest_res.test_status = test_status;
@@ -122,12 +125,13 @@ bool run_unit_tests_from_code(){
     unittest_res.num_of_tests = num_of_tests;
 
     print_test_res(unittest_res);
+    ASSERT_CLEAN;
 
     return unittest_res.test_correct;
 }
 
 static bool check_test(int test_num, TestEquation test){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     AnsEquation ans_i = {
         .num_valid_ans = ZERO_ROOTS, 
         .ans1 = 0, 
@@ -135,9 +139,11 @@ static bool check_test(int test_num, TestEquation test){
     };
 
     find_ans(test.equat, &ans_i);
+    ASSERT_CLEAN;
 
     if (!check_ans(ans_i, test.ans)){
         print_error(test_num, test, ans_i);
+        ASSERT_CLEAN;
         return false;
     }
 
@@ -145,7 +151,7 @@ static bool check_test(int test_num, TestEquation test){
 }
 
 static int print_error(int test_num, TestEquation test, AnsEquation ans){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     printf(CONSOLE_RED " Test %d was failed:" CONSOLE_RESET " %.4lf %.4lf %.4lf \n",
            test_num, test.equat.a, test.equat.b, test.equat.c);
     printf("\t" CONSOLE_GREEN "expected ans: %14s %.4lf %.4lf\n" CONSOLE_RESET,
@@ -157,7 +163,7 @@ static int print_error(int test_num, TestEquation test, AnsEquation ans){
 }
 
 bool print_test_res(TestsRes result){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     printf("Tests were complited\n Result: ");
     if (result.test_status){
         printf(CONSOLE_GREEN "\tTESTS PASSED: %d/%d\n" CONSOLE_RESET, result.test_correct, result.num_of_tests);
@@ -169,7 +175,7 @@ bool print_test_res(TestsRes result){
 }
 
 static const char* rootscount_to_string(RootsCount num){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     switch (num) {
         case ONE_ROOT:        return "ONE ROOT";
         case TWO_ROOTS:       return "TWO ROOTS";
@@ -181,7 +187,8 @@ static const char* rootscount_to_string(RootsCount num){
 }
 
 bool check_ans(AnsEquation x, AnsEquation y){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
+
     if (x.num_valid_ans == y.num_valid_ans){
         if (x.num_valid_ans == INFINITY_ROOTS || x.num_valid_ans == ZERO_ROOTS){
             return true;

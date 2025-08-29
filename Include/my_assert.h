@@ -12,6 +12,11 @@
 
 #include "work_with_colors.h"
 
+#define ADD_PATH_TO_ASSERT add_func(__FUNCTION__)
+#define POP_ASSERT         stack_pop()
+#define ASSERT_CLEAN       clean_stack(__FUNCTION__)
+#define PRINT_PATH         print_stack()
+
 /**
  * @brief commands wich we can use with stack
  */
@@ -59,11 +64,33 @@ if (!(condition)) {                                              \
 } 
 
 /**
- * @brief work with path to assert
+ * @brief delite the last elem of path
  * 
- * @param [in] command         the command we execute with the path
- * @param [in] ...             elementwich we put in the path (may be unused)
+ * @param [in] stack    path to assert
+ * 
+ * @return 0
  */
-void path_to_assert(COMMAND_STACK command, ...);
+int stack_pop();
+//TODO documentation
+int clean_stack(const char *func);
+
+/**
+ * @brief add name of function in stack
+ * 
+ * @param [in] stack  path to assert
+ * @param [in] str     new file
+ * 
+ * @return 0
+ */
+int add_func(const char* str);
+
+/**
+ * @brief print path to assert
+ * 
+ * @param [in] stack    path to asxsert
+ * 
+ * @return 0
+ */
+int print_stack();
 
 #endif

@@ -9,7 +9,7 @@ CFLAGS = -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef \
    -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits\
    -Wwrite-strings -Werror=vla -D_DEBUG -D_EJUDGE_CLIENT_SIDE -DCOLOR_PRINT
    
-OBJECTS = main.o consol.o args.o input_output.o unit_test.o solving.o work_with_colors.o my_assert.o
+OBJECTS = main.o console.o args.o input_output.o unit_test.o solving.o work_with_colors.o my_assert.o
 EXECUTABLE_NAME = quadratic_equation.exe
 DIR_BUILD = Build
 DIR_SOURCE = Source
@@ -39,7 +39,7 @@ start_file_test:
 	./$(DIR_BUILD)/$(EXECUTABLE_NAME) --file-test test
 
 start_consol:
-	./$(DIR_BUILD)/$(EXECUTABLE_NAME) --consol
+	./$(DIR_BUILD)/$(EXECUTABLE_NAME) --console
 
 clean:
 	rm -rf $(DIR_BUILD)/$(DIR_SOURCE)/

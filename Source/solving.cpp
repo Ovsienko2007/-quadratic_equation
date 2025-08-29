@@ -21,7 +21,7 @@ static int linear_equation(struct Equation equation, struct AnsEquation *ans);
 static int quadratic_equation(struct Equation equation, struct AnsEquation *ans);
 
 int find_ans(Equation equation, AnsEquation *ans){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     MY_ASSERT(ans != NULL, 1);
 
     if (is_equal(equation.a, 0)){
@@ -33,7 +33,7 @@ int find_ans(Equation equation, AnsEquation *ans){
 }
 
 static int linear_equation(Equation equation, AnsEquation *ans){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     MY_ASSERT(ans != NULL, 1);
 
     if (is_equal(equation.b, 0)){
@@ -53,7 +53,7 @@ static int linear_equation(Equation equation, AnsEquation *ans){
 }
 
 static int quadratic_equation(Equation equation, AnsEquation *ans){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ASSERT_CLEAN;
     MY_ASSERT(ans != NULL, 1);
 
     double dis = equation.b * equation.b - 4 * equation.a * equation.c;
@@ -82,8 +82,7 @@ bool is_equal(double x1, double x2){
 }
 
 int minus_zero_to_zero(double *ans){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
-    assert(ans != NULL);
+    MY_ASSERT(ans != NULL, 1);
 
     if (is_equal(*ans, 0)){
         *ans = 0;

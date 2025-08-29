@@ -1,7 +1,7 @@
 #include "args.h"
 
 char** check_argument(int argc, char **argv, const char *arg){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     MY_ASSERT(argv != NULL, 0);    
 
     for (int arg_num = 0; arg_num < argc; arg_num++){
@@ -13,7 +13,10 @@ char** check_argument(int argc, char **argv, const char *arg){
 }
 
 const char* get_option_argument(int argc, char **argv, char **option_ptr){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
+    MY_ASSERT(argv != NULL, 0);
+    MY_ASSERT(option_ptr != NULL, 0);
+
     if (option_ptr - argv >= argc) {
         return NULL;
     }

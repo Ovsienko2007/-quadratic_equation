@@ -22,8 +22,8 @@ static RootsCount string_to_rootscount(const char *num);
 
 // TODO assert
 bool input_equation(Equation *equation){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
-
+    ADD_PATH_TO_ASSERT;
+    ASSERT_CLEAN;
     bool flag = false;
 
     do{
@@ -31,6 +31,7 @@ bool input_equation(Equation *equation){
 
         if (flag){
             if (clean_buffer(stdin)){
+                ASSERT_CLEAN;
                 printf(CONSOLE_BLUE "End of file" CONSOLE_RESET);
                 return true;
             }
@@ -42,6 +43,7 @@ bool input_equation(Equation *equation){
 
     if (isalpha(getchar())){
         clean_buffer(stdin);
+        ASSERT_CLEAN;
         return input_equation(equation);
     }
     return false;
@@ -49,8 +51,7 @@ bool input_equation(Equation *equation){
 }
 
 bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
-
+    ADD_PATH_TO_ASSERT;
     MY_ASSERT(test_file != NULL, 1);
     if (fscanf(test_file, "%lf %lf %lf", &(test->equat.a), &(test->equat.b), &(test->equat.c)) != 3){
         if (fgetc(test_file) != EOF){
@@ -64,6 +65,7 @@ bool read_test_from_file(FILE *test_file, TestEquation *test, int line){
     fscanf(test_file, "%40s", num_str_root_count);
 
     test->ans.num_valid_ans = string_to_rootscount(num_str_root_count);
+    ASSERT_CLEAN;
 
     if (test->ans.num_valid_ans == ERROR
         || fscanf(test_file, "%lf %lf", &(test->ans.ans1), &(test->ans.ans2)) != 2){
@@ -80,7 +82,7 @@ static bool check_not_inf_nan(double x){
 }
 
 int clean_buffer(FILE *stream){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     MY_ASSERT(stream, 1);
 
     int c = 0;
@@ -92,7 +94,7 @@ int clean_buffer(FILE *stream){
 }
 
 static RootsCount string_to_rootscount(const char *num){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     MY_ASSERT(num != NULL, ERROR);
  
     if (strcmp("ONE_ROOT",       num) == 0)  return ONE_ROOT;
@@ -104,7 +106,7 @@ static RootsCount string_to_rootscount(const char *num){
 }
 
 bool print_ans(AnsEquation ans){
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     switch (ans.num_valid_ans){
         case ZERO_ROOTS:
             printf("The sequation has " CONSOLE_RED "no roots" CONSOLE_RESET "\n");

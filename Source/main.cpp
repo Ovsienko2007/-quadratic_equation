@@ -4,19 +4,20 @@
 #include "work_with_colors.h"
 #include "args.h"
 #include "my_assert.h"
-#include "consol.h"
+#include "console.h"
 
 int main(int argc, char *argv[]){
-    path_to_assert(CREAT);
-    path_to_assert(ADD, __PRETTY_FUNCTION__);
+    ADD_PATH_TO_ASSERT;
     
     if (check_argument(argc, argv, "--embedded-test")){
         return !run_unit_tests_from_code();
     }
-    
-    if (check_argument(argc, argv, "--consol")){
-        return consol();
+    ASSERT_CLEAN;
+
+    if (check_argument(argc, argv, "--console")){
+        return run_console();
     }
+    ASSERT_CLEAN;
 
     if (char **option_ptr = check_argument(argc, argv, "--file-test")){
 
@@ -29,8 +30,10 @@ int main(int argc, char *argv[]){
 
         return test_file(file_name);
     }
+    ASSERT_CLEAN;
 
     program();
-
+    ASSERT_CLEAN;
+    
     return 0;
 }
